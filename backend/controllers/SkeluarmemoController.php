@@ -66,9 +66,28 @@ class SkeluarmemoController extends Controller
     {
         $model = new Skeluarmemo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $file = \yii\web\UploadedFile::getInstance($model, 'file_upload');
+            if ($file) {
+                $namafile = $file->name;
+                if ($file->saveAs(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $namafile)) {
+                    $model->file_upload = $namafile;
+                }
+            }
+
+            // echo '<pre>';
+            // print_r($$_FILES);
+            // exit;
+
+            if ($model->save(false)) {
+                // return $this->redirect(['index']);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
 
         return $this->render('create', [
             'model' => $model,
@@ -86,9 +105,27 @@ class SkeluarmemoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $filelama = $model->file_upload;
+        if ($model->load(Yii::$app->request->post())) {
+            $file = \yii\web\UploadedFile::getInstance($model, 'file_upload');
+            if ($file) {
+                $namafile = $file->name;
+                if ($file->saveAs(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $namafile)) {
+                    $model->file_upload = $namafile;
+                }
+            } else {
+                $model->file_upload = $filelama;
+            }
+            if ($model->save(false)) {
+                // return $this->redirect(['index']);
+                return $this->redirect(['view', 'id' => $model->id]);
+
+            }
         }
+
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
 
         return $this->render('update', [
             'model' => $model,
@@ -123,5 +160,25 @@ class SkeluarmemoController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDeleteUpload() {
+
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $keys = Yii::$app->request->post('key');
+        $key = explode(' ', $keys);
+
+        $model = Skeluarmemo::find()->where([
+                    'id' => $key[1],
+                        //'create_id' => Yii::$app->user->id
+                ])->one();
+
+        if ($key[0] == 'file_upload') {
+            @unlink(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $model->file_upload);
+            $model->file_upload = NULL;
+            $model->save(false);
+        }
+
+        return [];
     }
 }
