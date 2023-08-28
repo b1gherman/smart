@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SkeluarPengantar */
+/* @var $model backend\models\SkeluarSpd */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="skeluar-pengantar-form">
+<div class="skeluar-spd-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -26,14 +26,60 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?php //= $form->field($model, 'idpengirim')->textInput() 
+    <?php //= $form->field($model, 'idppk')->textInput() ?>
+    <?= $form->field($model, 'idppk')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai')) ?>
+
+    <?php //= $form->field($model, 'idppd')->textInput() ?>
+    <?= $form->field($model, 'idppd')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai')) ?>
+
+    <?= $form->field($model, 'tingkat_biaya')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'maksud')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'alat_angkut')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tempat_berangkat')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tujuan')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'lama')->textInput() ?>
+
+    <?php //= $form->field($model, 'tgl_berangkat')->textInput() ?>
+    <?=
+    $form->field($model, 'tgl_berangkat')->widget(kartik\date\DatePicker::className(), [
+        'options' => ['placeholder' => 'Pilih Tanggal'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'starView' => 0,
+            'todayHighlight' => true
+        ]
+    ])
     ?>
-    <?= $form->field($model, 'idpengirim')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai')) ?>
+
+    <?php //= $form->field($model, 'tgl_kembali')->textInput() ?>
+    <?=
+    $form->field($model, 'tgl_kembali')->widget(kartik\date\DatePicker::className(), [
+        'options' => ['placeholder' => 'Pilih Tanggal'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'starView' => 0,
+            'todayHighlight' => true
+        ]
+    ])
+    ?>
+
+    <?php //= $form->field($model, 'idanggaran_instansi')->textInput() ?>
+    <?= $form->field($model, 'idanggaran_instansi')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Instansi::find()->all(), 'id', 'namainstansi')) ?>
+
+    <?= $form->field($model, 'anggaran_akun')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'keterangan_lain')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
-    <?php //= $form->field($model, 'tanggal')->textInput() 
-    ?>
+    <?php //= $form->field($model, 'tanggal')->textInput() ?>
     <?=
     $form->field($model, 'tanggal')->widget(kartik\date\DatePicker::className(), [
         'options' => ['placeholder' => 'Pilih Tanggal'],
@@ -46,38 +92,8 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
-    <?php //= $form->field($model, 'kepada')->textarea(['rows' => 6]) 
-    ?>
-    <?= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 300,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
-
-    <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) 
-    ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
-
+    <?php //= $form->field($model, 'status')->dropDownList([ 'DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI', ], ['prompt' => '']) ?>
+    <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) ?>
     <?php
     if ($role == 'admin') { ?>
         <?= $form->field($model, 'status')->dropDownList(['DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI',]) ?>
@@ -91,9 +107,9 @@ use yii\widgets\ActiveForm;
             if (!empty($model->file_upload)) {
                 $file = yii\helpers\Url::base() . '/naskahkeluar/' . $model->file_upload;
                 $json[] = [
-                    'caption' => $model->file_upload, yii\helpers\Url::to(['/skeluar-pengantar/delete-upload']),
+                    'caption' => $model->file_upload, yii\helpers\Url::to(['/skeluar-spd/delete-upload']),
                     'key' => 'file_upload' . $model->id,
-                    //'url' => yii\helpers\Url::to(['skeluar-keterangan/delete-upload'])
+                    //'url' => yii\helpers\Url::to(['skeluar-spd/delete-upload'])
                 ];
             }
             ?>
@@ -116,7 +132,7 @@ use yii\widgets\ActiveForm;
                         'encodeUrl' => false,
                         'uploadAsync' => true,
                         'maxFileSize' => 3 * 1024 * 1024,
-                        'deleteUrl' => yii\helpers\Url::to(['/skeluar-pengantar/delete-upload']),
+                        'deleteUrl' => yii\helpers\Url::to(['/skeluar-spd/delete-upload']),
                         // 'allowedExtensions' => ['.pdf'],
                     ]
                 ])
@@ -140,7 +156,7 @@ use yii\widgets\ActiveForm;
                         'encodeUrl' => false,
                         'uploadAsync' => true,
                         'maxFileSize' => 3 * 1024 * 1024,
-                        'deleteUrl' => yii\helpers\Url::to(['/skeluar-pengantar/delete-upload']),
+                        'deleteUrl' => yii\helpers\Url::to(['/skeluar-spd/delete-upload']),
                         // 'allowedExtensions' => ['.pdf'],
                     ]
                 ]);
@@ -159,14 +175,11 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?php //= $form->field($model, 'create_at')->textInput() 
-    ?>
+    <?php //= $form->field($model, 'create_at')->textInput() ?>
 
-    <?php //= $form->field($model, 'update_at')->textInput() 
-    ?>
+    <?php //= $form->field($model, 'update_at')->textInput() ?>
 
-    <?php //= $form->field($model, 'iduser')->textInput() 
-    ?>
+    <?php //= $form->field($model, 'iduser')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
