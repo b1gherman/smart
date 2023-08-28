@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'kepada:ntext',
             // 'isi:ntext',
             [
-                'label' => 'Isi Surat Undangan Eksternal',
+                'label' => 'Isi Surat Undangan Internal',
                 'attribute' => 'isi',
                 'format' => 'html',
             ],

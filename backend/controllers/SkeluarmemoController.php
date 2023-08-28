@@ -75,10 +75,6 @@ class SkeluarmemoController extends Controller
                 }
             }
 
-            // echo '<pre>';
-            // print_r($$_FILES);
-            // exit;
-
             if ($model->save(false)) {
                 // return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);

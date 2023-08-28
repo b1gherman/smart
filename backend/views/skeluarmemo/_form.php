@@ -65,7 +65,7 @@ use yii\widgets\ActiveForm;
 
     <?php // $form->field($model, 'idttd')->textInput() 
     ?>
-    <?= $form->field($model, 'idttd')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Jabatanstruktural::find()->where(['status' => 1])->orderBy('urutan')->all(), 'id', 'jabatan.namajabatan')) ?>
+    <?= $form->field($model, 'idttd')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Jabatan::find()->all(), 'id', 'namajabatan')) ?>
 
     <?= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
 
@@ -89,8 +89,6 @@ use yii\widgets\ActiveForm;
             }
             ?>
             <?php if (!$model->isNewRecord) : ?>
-
-
                 <?=
                 $form->field($model, 'file_upload')->widget(kartik\file\FileInput::className(), [
                     'options' => ['accept' => 'pdf/*'],
