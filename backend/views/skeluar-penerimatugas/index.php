@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SkeluarSpdPengikutSearch */
+/* @var $searchModel backend\models\SkeluarPenerimatugasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pengikut Perjalanan Dinas';
+$this->title = 'Penerima Tugas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="skeluar-spd-pengikut-index">
+<div class="skeluar-penerimatugas-index">
 
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
 
     <p>
-        <?= Html::a('Create Pengikut Perjalanan Dinas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Penerima Tugas', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,12 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'idspd',
-            'nama',
-            'tanggal_lahir',
+            // 'id',
+            'idtugas',
+            'idpenerima',
             'keterangan',
-            //'create_at',
+            // 'create_at',
             //'update_at',
             //'iduser',
 

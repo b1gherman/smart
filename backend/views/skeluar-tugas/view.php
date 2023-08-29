@@ -4,19 +4,18 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SkeluarSpdPengikut */
+/* @var $model backend\models\SkeluarTugas */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pengikut Perjalanan Dinas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Surat Tugas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="skeluar-spd-pengikut-view">
+<div class="skeluar-tugas-view">
 
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
 
     <p>
-        <?= Html::a('Create', ['createother', 'id' => $model->id, 'idspd' => $model->idspd], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -31,10 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'idspd',
-            'nama',
-            'tanggal_lahir',
-            'keterangan',
+            'nomor',
+            // 'idpemberi',
+            [
+                'label' => 'Pemberi',
+                'attribute' => 'idpemberi0.namapegawai'
+            ],
+            // 'penerima:ntext',
+            [
+                'label' => 'Penerima',
+                'attribute' => 'penerima',
+                'format' => 'html',
+            ],
+            'tugas:ntext',
+            'tanggal_tugas',
+            'selama',
+            'lokasi',
+            'keterangan:ntext',
+            'tempat',
+            'tanggal',
+            'status',
+            'file_upload',
             'create_at',
             'update_at',
             'iduser',

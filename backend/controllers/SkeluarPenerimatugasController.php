@@ -2,18 +2,18 @@
 
 namespace backend\controllers;
 
-use backend\models\SkeluarSpd;
 use Yii;
-use backend\models\SkeluarSpdPengikut;
-use backend\models\SkeluarSpdPengikutSearch;
+use backend\models\SkeluarPenerimatugas;
+use backend\models\SkeluarPenerimatugasSearch;
+use backend\models\SkeluarTugas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SkeluarSpdPengikutController implements the CRUD actions for SkeluarSpdPengikut model.
+ * SkeluarPenerimatugasController implements the CRUD actions for SkeluarPenerimatugas model.
  */
-class SkeluarSpdPengikutController extends Controller
+class SkeluarPenerimatugasController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +31,12 @@ class SkeluarSpdPengikutController extends Controller
     }
 
     /**
-     * Lists all SkeluarSpdPengikut models.
+     * Lists all SkeluarPenerimatugas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SkeluarSpdPengikutSearch();
+        $searchModel = new SkeluarPenerimatugasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +46,7 @@ class SkeluarSpdPengikutController extends Controller
     }
 
     /**
-     * Displays a single SkeluarSpdPengikut model.
+     * Displays a single SkeluarPenerimatugas model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,17 +59,21 @@ class SkeluarSpdPengikutController extends Controller
     }
 
     /**
-     * Creates a new SkeluarSpdPengikut model.
+     * Creates a new SkeluarPenerimatugas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
 
      public function actionCreate($id)
      {
-         $spd = \backend\models\SkeluarSpd::findOne($id);
-         $model = new SkeluarSpdPengikut();
-         $model->tujuan = $spd->tujuan;
-         $model->idspd = $id;
+         $datatugas = \backend\models\SkeluarTugas::findOne($id);
+         $model = new SkeluarPenerimatugas();
+         // $model = $model::findOne($id);
+        // echo '<pre>';
+        // print_r($model);
+        // exit;
+         $model->tugas = $datatugas->tugas;
+         $model->idtugas = $id;
  
          if ($model->load(Yii::$app->request->post()) && $model->save()) {
              return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +86,7 @@ class SkeluarSpdPengikutController extends Controller
 
     // public function actionCreate()
     // {
-    //     $model = new SkeluarSpdPengikut();
+    //     $model = new SkeluarPenerimatugas();
 
     //     if ($model->load(Yii::$app->request->post()) && $model->save()) {
     //         return $this->redirect(['view', 'id' => $model->id]);
@@ -93,16 +97,12 @@ class SkeluarSpdPengikutController extends Controller
     //     ]);
     // }
 
-    public function actionCreateother($idspd)
+    public function actionCreateother($idtugas)
     {
-        $spd = \backend\models\SkeluarSpd::findOne($idspd);
-        $model = new SkeluarSpdPengikut();
-        // $model = $model::findOne($id);
-        // echo '<pre>';
-        // print_r($model);
-        // exit;
-        $model->tujuan = $spd->tujuan;
-        $model->idspd = $idspd;
+        $datatugas = \backend\models\SkeluarTugas::findOne($idtugas);
+        $model = new SkeluarPenerimatugas();
+        $model->tugas = $datatugas->tugas;
+        $model->idtugas = $idtugas;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -115,7 +115,7 @@ class SkeluarSpdPengikutController extends Controller
     }
 
     /**
-     * Updates an existing SkeluarSpdPengikut model.
+     * Updates an existing SkeluarPenerimatugas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -125,13 +125,13 @@ class SkeluarSpdPengikutController extends Controller
     {
         $model = $this->findModel($id);
 
-        $spd = \backend\models\SkeluarSpd::findOne($model->idspd);
-        // $spd = SkeluarSpd::findOne($model->idspd);
+        $datatugas = \backend\models\SkeluarTugas::findOne($model->idtugas);
+        // $datatugas = SkeluarTugas::findOne($model->idtugas);
         // echo '<pre>';
-        // print_r($spd);
+        // print_r($datatugas);
         // exit;
-        $model->tujuan = $spd->tujuan;
-        $model->idspd = $spd->id;
+        $model->tugas = $datatugas->tugas;
+        $model->idtugas = $datatugas->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -143,7 +143,7 @@ class SkeluarSpdPengikutController extends Controller
     }
 
     /**
-     * Deletes an existing SkeluarSpdPengikut model.
+     * Deletes an existing SkeluarPenerimatugas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -154,19 +154,19 @@ class SkeluarSpdPengikutController extends Controller
         $this->findModel($id)->delete();
 
         // return $this->redirect(['index']);
-        return $this->redirect(['skeluar-spd/index']);
+        return $this->redirect(['skeluar-tugas/index']);
     }
 
     /**
-     * Finds the SkeluarSpdPengikut model based on its primary key value.
+     * Finds the SkeluarPenerimatugas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SkeluarSpdPengikut the loaded model
+     * @return SkeluarPenerimatugas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SkeluarSpdPengikut::findOne($id)) !== null) {
+        if (($model = SkeluarPenerimatugas::findOne($id)) !== null) {
             return $model;
         }
 

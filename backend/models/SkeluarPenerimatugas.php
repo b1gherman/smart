@@ -5,29 +5,29 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "skeluar_spd_pengikut".
+ * This is the model class for table "skeluar_penerimatugas".
  *
  * @property int $id
- * @property int|null $idspd
- * @property string|null $nama
- * @property string|null $tanggal_lahir
+ * @property int|null $idtugas
+ * @property int|null $idpenerima
  * @property string|null $keterangan
  * @property string $create_at
  * @property string $update_at
  * @property int|null $iduser
  *
- * @property SkeluarSpd $idspd0
+ * @property Pegawai $idpenerima0
+ * @property SkeluarTugas $idtugas0
  */
-class SkeluarSpdPengikut extends \yii\db\ActiveRecord
+class SkeluarPenerimatugas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
 
-    public $tujuan;
+    public $tugas;
     public static function tableName()
     {
-        return 'skeluar_spd_pengikut';
+        return 'skeluar_penerimatugas';
     }
 
     /**
@@ -36,11 +36,12 @@ class SkeluarSpdPengikut extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idspd', 'iduser'], 'integer'],
-            [['tanggal_lahir', 'create_at', 'update_at'], 'safe'],
-            [['nama'], 'string', 'max' => 200],
+            [['idtugas', 'idpenerima', 'iduser'], 'integer'],
+            [['create_at', 'update_at'], 'safe'],
+            [['tugas'], 'string'],
             [['keterangan'], 'string', 'max' => 500],
-            [['idspd'], 'exist', 'skipOnError' => true, 'targetClass' => SkeluarSpd::className(), 'targetAttribute' => ['idspd' => 'id']],
+            [['idpenerima'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpenerima' => 'id']],
+            [['idtugas'], 'exist', 'skipOnError' => true, 'targetClass' => SkeluarTugas::className(), 'targetAttribute' => ['idtugas' => 'id']],
         ];
     }
 
@@ -51,9 +52,8 @@ class SkeluarSpdPengikut extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idspd' => 'Idspd',
-            'nama' => 'Nama',
-            'tanggal_lahir' => 'Tanggal Lahir',
+            'idtugas' => 'Idtugas',
+            'idpenerima' => 'Penerima Tugas',
             'keterangan' => 'Keterangan',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
@@ -62,13 +62,23 @@ class SkeluarSpdPengikut extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Idspd0]].
+     * Gets query for [[Idpenerima0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdspd0()
+    public function getIdpenerima0()
     {
-        return $this->hasOne(SkeluarSpd::className(), ['id' => 'idspd']);
+        return $this->hasOne(Pegawai::className(), ['id' => 'idpenerima']);
+    }
+
+    /**
+     * Gets query for [[Idtugas0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtugas0()
+    {
+        return $this->hasOne(SkeluarTugas::className(), ['id' => 'idtugas']);
     }
 
     public function beforeSave($insert)

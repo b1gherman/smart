@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SkeluarSpdPengikut */
+/* @var $model backend\models\SkeluarTugas */
 
-$this->title = 'Update Pengikut Perjalanan Dinas: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pengikut Perjalanan Dinas', 'url' => ['index']];
+$this->title = 'Update Surat Tugas: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Surat Tugas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="skeluar-spd-pengikut-update">
+<div class="skeluar-tugas-update">
 
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
 

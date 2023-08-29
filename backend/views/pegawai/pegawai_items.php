@@ -20,8 +20,22 @@ use yii\grid\GridView;
             //'idgolongan',
             'golongan.kode_gol',
             'tmt',
-            'status',
-        //['class' => 'yii\grid\ActionColumn'],
+            // 'status',
+            [
+                'label' => 'Status',
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    if ($model->status == 0) {
+                        $stat = 'Tidak Aktif';
+                    }
+                    if ($model->status == 1) {
+                        $stat = 'Aktif';
+                    }
+                    return $stat;
+                },
+                'format' => 'html',
+            ],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]);
     ?>
@@ -72,7 +86,7 @@ use yii\grid\GridView;
             'esl',
             'tmt',
             'status',
-        //['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]);
     ?>
@@ -96,7 +110,7 @@ use yii\grid\GridView;
     //     ],
     // ]);
     ?>
-    
+
     <!-- <h5>Anak</h5> -->
     <?php //=
     // GridView::widget([
