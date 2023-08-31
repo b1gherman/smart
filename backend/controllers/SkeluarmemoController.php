@@ -8,6 +8,7 @@ use backend\models\SkeluarmemoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * SkeluarmemoController implements the CRUD actions for Skeluarmemo model.
@@ -176,5 +177,61 @@ class SkeluarmemoController extends Controller
         }
 
         return [];
+    }
+
+    public function actionReport($id) {
+        // get your HTML raw content without any layouts or scripts
+
+        $model = $this->findModel($id);
+        $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idttd, 'status' => 1]);
+        $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
+        // $modelinstansi = \backend\models\Instansi::findOne(1);
+        // $ttd1 = \backend\models\Jabatanstruktural::findOne($model->ttd);
+        
+        //Golongan
+        // $modelgolpeg = \backend\models\Golonganpegawai::findOne(['idpegawai' => $model->id_pegawai, 'status' => 1]);
+        // $modelgolongan = \backend\models\Golongan::findOne(['id' => $modelgolpeg->idgolongan]);
+
+        $content = $this->renderPartial('_reportMemo', [
+            'model' => $model,
+            'modeljabpeg' => $modeljabpeg,
+            'modelpegawai' => $modelpegawai,
+            // 'modelinstansi' => $modelinstansi,
+            // 'ttd1'=>$ttd1
+                // 'modelgolpeg' => $modelgolpeg,
+                // 'modelgolongan' => $modelgolongan
+        ]);
+
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            // set mPDF properties on the fly
+            'options' => ['title' => 'Krajee Report Title'],
+            // call mPDF methods on the fly
+            'methods' => [
+            //'SetHeader' => ['Barang Keluar'],
+            //'SetFooter' => ['{PAGENO}'],
+            ],
+            'marginTop' => 0,
+            'marginLeft' => 0,
+            'marginRight' => 0
+        ]);
+
+        // return the pdf output as per the destination setting
+        return $pdf->render();
     }
 }

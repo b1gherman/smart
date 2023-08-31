@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'update_at',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}{report}',
+                'template' => '{view} {update} {delete} {report}',
                 'buttons' => [
                     'report' => function ($url, $model) {
                         return Html::a('<span class="fa fa-print"></span>', '', [

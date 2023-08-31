@@ -61,7 +61,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'gajipokok')->textInput() ?>
 
-    <?= $form->field($model, 'berkalaakhir')->textInput() ?>
+    <?php //= $form->field($model, 'berkalaakhir')->textInput() ?>
+    <?=
+    $form->field($model, 'berkalaakhir')->widget(kartik\date\DatePicker::className(), [
+        'options' => ['placeholder' => 'Pilih Tanggal'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'starView' => 0,
+            'todayHighlight' => true
+        ]
+    ])
+    ?>
 
     <?= $form->field($model, 'statuskawin')->dropDownList(['Kawin' => 'Kawin', 'Belum Kawin' => 'Belum Kawin',], ['prompt' => '']) ?>
 

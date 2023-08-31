@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -49,7 +50,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'update_at',
             //'iduser',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {report}',
+                'buttons' => [
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-print"></span>', '', [
+                                    'title' => Yii::t('app', 'Print'),
+                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                                        '/skeluar-pengantar/report',
+                                        'id' => $model->id
+                                    ]) . "'); return false",
+                                        // 'class' => 'btn btn-outline-success btn-xs'
+                        ]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 

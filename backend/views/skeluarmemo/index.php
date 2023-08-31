@@ -64,7 +64,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'create_at',
             //'update_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {report}',
+                'buttons' => [
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-print"></span>', '', [
+                                    'title' => Yii::t('app', 'Print'),
+                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                                        '/skeluarmemo/report',
+                                        'id' => $model->id
+                                    ]) . "'); return false",
+                                        // 'class' => 'btn btn-outline-success btn-xs'
+                        ]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 
