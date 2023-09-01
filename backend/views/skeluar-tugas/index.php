@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'kartik\grid\ActionColumn',
                 'dropdown' => true,
                 'dropdownOptions' => ['class' => 'float-right'],
-                'template' => \mdm\admin\components\Helper::filterActionColumn ("{penerima}&nbsp;{view}&nbsp;{update}&nbsp;{delete}<br/>"),
+                'template' => \mdm\admin\components\Helper::filterActionColumn ("{penerima}&nbsp;{view}&nbsp;{update}&nbsp;{delete}&nbsp;{report}<br/>"),
                 'buttons' => [
                     'penerima' => function ($url, $model) {
                         return Html::a('<span>Penerima</span>', $url, [
@@ -96,7 +96,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
                                     'data-method' => 'post',
                         ]);
-                    },                   
+                    },
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-print" style="font-size:10px">Print</span>', '', [
+                                    'title' => Yii::t('app', 'Print'),
+                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                                        '/skeluar-tugas/report',
+                                        'id' => $model->id
+                                    ])
+                                    . "'); return false",
+                                    'class' => 'btn btn-outline-info btn-xs'
+                        ]);
+                    },                      
                 ],
             ],
         ],

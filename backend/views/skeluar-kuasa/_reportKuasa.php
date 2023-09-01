@@ -18,7 +18,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 100%; height: 108px;" border="0">
+    <table style="width: 100%; height: 108px;" border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr style="height: 0px;">
                 <td style="width: 100%; height: 0px;" colspan="2">Yang bertanda tangan di bawah ini selanjutnya disebut sebagai pihak pertama: </td>
@@ -59,7 +59,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 100%; height: 108px;" border="0">
+    <table style="width: 100%; height: 108px;" border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr style="height: 0px;">
                 <td style="width: 22%; height: 0px;">Nama</td>

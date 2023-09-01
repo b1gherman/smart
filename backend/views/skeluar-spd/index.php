@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'kartik\grid\ActionColumn',
                 'dropdown' => true,
                 'dropdownOptions' => ['class' => 'float-right'],
-                'template' => \mdm\admin\components\Helper::filterActionColumn ("{pengikut}&nbsp;{view}&nbsp;{update}&nbsp;{delete}<br/>"),
+                'template' => \mdm\admin\components\Helper::filterActionColumn ("{pengikut}&nbsp;{view}&nbsp;{update}&nbsp;{delete}&nbsp;{report}<br/>"),
                 // . "{golongan}<br/>"),
                 'buttons' => [
                     'pengikut' => function ($url, $model) {
@@ -106,6 +106,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'class' => 'btn btn-outline-info btn-xs',
                                     'data-confirm' => Yii::t('app', 'Are you sure to delete this item?'),
                                     'data-method' => 'post',
+                        ]);
+                    },
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-print" style="font-size:10px">Print</span>', '', [
+                                    'title' => Yii::t('app', 'Print'),
+                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                                        '/skeluar-spd/report',
+                                        'id' => $model->id
+                                    ]). "'); return false",
+                                    'class' => 'btn btn-outline-info btn-xs'
                         ]);
                     },                   
                 ],
