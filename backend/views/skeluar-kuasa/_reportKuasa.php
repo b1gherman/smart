@@ -21,30 +21,35 @@
     <table style="width: 100%; height: 108px;" border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr style="height: 0px;">
-                <td style="width: 100%; height: 0px;" colspan="2">Yang bertanda tangan di bawah ini selanjutnya disebut sebagai pihak pertama: </td>
+                <td style="width: 100%; height: 0px;" colspan="3">Yang bertanda tangan di bawah ini selanjutnya disebut sebagai pihak pertama: </td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 100%; height: 0px;" colspan="2">&nbsp;</td>
+                <td style="width: 100%; height: 0px;" colspan="3">&nbsp;</td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Nama</td>
-                <td style="width: 78%; height: 0px;">: <?= $model->idpemberi0->namapegawai ?></td>
+                <td style="width: 18%; height: 0px;">Nama</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80%; height: 0px;"><?= $model->idpemberi0->namapegawai ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Jabatan</td>
-                <td style="width: 78%; height: 0px;">: <?= $modeljabatanpemberi->namajabatan ?></td>
+                <td style="width: 18%; height: 0px;">Jabatan</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80%; height: 0px;"><?= $modeljabatanpemberi->namajabatan ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px; vertical-align: text-top;">Alamat</td>
-                <td style="width: 78%; height: 0px; vertical-align: text-top;">: <?= $model->idpemberi0->alamat ?></td>
+                <td style="width: 18%; height: 0px; vertical-align: text-top;">Alamat</td>
+                <td style="width: 2%; height: 0px; vertical-align: text-top;">:</td>
+                <td style="width: 80%; height: 0px; vertical-align: text-top;"><?= $model->idpemberi0->alamat ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Nomor telepon</td>
-                <td style="width: 78%; height: 0px;">: <?= $model->idpemberi0->hp ?></td>
+                <td style="width: 18%; height: 0px;">Nomor telepon</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80%; height: 0px;"><?= $model->idpemberi0->hp ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">&nbsp;</td>
-                <td style="width: 78%; height: 0px;">&nbsp;</td>
+                <td style="width: 18%; height: 0px;">&nbsp;</td>
+                <td style="width: 2%; height: 0px;">&nbsp;</td>
+                <td style="width: 80%; height: 0px;">&nbsp;</td>
             </tr>
         </tbody>
     </table>
@@ -59,27 +64,32 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 100%; height: 108px;" border="0" cellspacing="0" cellpadding="0">
+    <table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Nama</td>
-                <td style="width: 78%; height: 0px;">: <?= $model->idpenerima0->namapegawai ?></td>
+                <td style="width: 18%; height: 0px;">Nama</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80% height: 0px;;"><?= $model->idpenerima0->namapegawai ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Jabatan</td>
-                <td style="width: 78%; height: 0px;">: <?= $modeljabatanpenerima->namajabatan ?></td>
+                <td style="width: 18%; height: 0px;">Jabatan</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80% height: 0px;;"><?= $modeljabatanpenerima->namajabatan ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px; vertical-align: text-top;">Alamat</td>
-                <td style="width: 78%; height: 0px; vertical-align: text-top;">: <?= $model->idpenerima0->alamat ?></td>
+                <td style="width: 18%; height: 0px; vertical-align: text-top;">Alamat</td>
+                <td style="width: 2%; height: 0px; vertical-align: text-top;">:</td>
+                <td style="width: 80% height: 0px; vertical-align: text-top;"><?= $model->idpenerima0->alamat ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">Nomor telepon</td>
-                <td style="width: 78%; height: 0px;">: <?= $model->idpenerima0->hp ?></td>
+                <td style="width: 18%; height: 0px;">Nomor telepon</td>
+                <td style="width: 2%; height: 0px;">:</td>
+                <td style="width: 80% height: 0px;;"><?= $model->idpenerima0->hp ?></td>
             </tr>
             <tr style="height: 0px;">
-                <td style="width: 22%; height: 0px;">&nbsp;</td>
-                <td style="width: 78%; height: 0px;">&nbsp;</td>
+                <td style="width: 18%; height: 0px;">&nbsp;</td>
+                <td style="width: 2%; height: 0px;">&nbsp;</td>
+                <td style="width: 80%; height: 0px;">&nbsp;</td>
             </tr>
         </tbody>
     </table>

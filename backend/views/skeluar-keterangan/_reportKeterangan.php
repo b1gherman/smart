@@ -98,7 +98,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 100%;" border="0">
+    <table style="width: 100%;" border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr>
                 <td style="width: 60%;">&nbsp;</td>
@@ -111,6 +111,10 @@
             <tr>
                 <td style="width: 60%;">&nbsp;</td>
                 <td style="width: 40%;"><?= $modeljabatanpemberi->namajabatan ?></td>
+            </tr>
+            <tr>
+                <td style="width: 60%;">&nbsp;</td>
+                <td style="width: 40%;">&nbsp;</td>
             </tr>
             <tr>
                 <td style="width: 60%;">&nbsp;</td>

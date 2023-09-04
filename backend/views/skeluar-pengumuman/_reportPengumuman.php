@@ -72,6 +72,10 @@
             </tr>
             <tr>
                 <td style="width: 60%;">&nbsp;</td>
+                <td style="width: 40%;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="width: 60%;">&nbsp;</td>
                 <td style="width: 40%;"><?= $model->idpembuat0->namapegawai ?></td>
             </tr>
             <tr>
