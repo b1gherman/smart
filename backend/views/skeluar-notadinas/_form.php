@@ -53,9 +53,11 @@ use yii\widgets\ActiveForm;
             'plugins' => [
                 'anchor', 'charmap', 'code', 'help', 'hr',
                 'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
+                'searchreplace', 'table', 'template', 'preview'
             ],
             'height' => 500,
+            'convert_urls' => false,
+            'element_format' => 'html',
             // ...
         ],
     ]) ?>

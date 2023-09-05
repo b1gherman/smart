@@ -36,10 +36,17 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
         'clientOptions' => [
             'plugins' => [
+                // 'anchor', 'charmap', 'code', 'help', 'hr',
+                // 'image', 'link', 'lists', 'media', 'paste',
+                // 'searchreplace', 'table',
                 'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
+                'image', 'link', 'lists', 'media', 'paste', 'nonbreaking',
+                'searchreplace', 'table', 'template', 'preview', 'save', 'lineheight'
+
             ],
+            // 'toolbar' => '| lineheightselect | undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | indent outdent',
+            // 'lineheight_formats' => "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt",
+            // 'template_cdate_classes' => 'cdate creationdate',
             'height' => 500,
             'convert_urls' => false,
             'element_format' => 'html',

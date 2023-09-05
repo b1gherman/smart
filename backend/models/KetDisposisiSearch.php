@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Jabatan;
+use backend\models\KetDisposisi;
 
 /**
- * JabatanSearch represents the model behind the search form of `backend\models\Jabatan`.
+ * KetDisposisiSearch represents the model behind the search form of `backend\models\KetDisposisi`.
  */
-class JabatanSearch extends Jabatan
+class KetDisposisiSearch extends KetDisposisi
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class JabatanSearch extends Jabatan
     {
         return [
             [['id'], 'integer'],
-            [['namajabatan','kelompok'], 'safe'],
+            [['keterangan_disposisi'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class JabatanSearch extends Jabatan
      */
     public function search($params)
     {
-        $query = Jabatan::find();
+        $query = KetDisposisi::find();
 
         // add conditions that should always apply here
 
@@ -61,8 +61,7 @@ class JabatanSearch extends Jabatan
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'namajabatan', $this->namajabatan])
-              ->andFilterWhere(['like', 'kelompok', $this->kelompok]);;
+        $query->andFilterWhere(['like', 'keterangan_disposisi', $this->keterangan_disposisi]);
 
         return $dataProvider;
     }

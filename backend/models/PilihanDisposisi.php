@@ -5,19 +5,20 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "jabatan".
+ * This is the model class for table "pilihan_disposisi".
  *
  * @property int $id
- * @property string $namajabatan
+ * @property string $pil_disposisi
+ * @property string $kelompok
  */
-class Jabatan extends \yii\db\ActiveRecord
+class PilihanDisposisi extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'jabatan';
+        return 'pilihan_disposisi';
     }
 
     /**
@@ -26,8 +27,8 @@ class Jabatan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['namajabatan'], 'required'],
-            [['namajabatan'], 'string', 'max' => 200],
+            [['pil_disposisi'], 'required'],
+            [['pil_disposisi'], 'string', 'max' => 100],
             [['kelompok'], 'string'],
         ];
     }
@@ -39,7 +40,7 @@ class Jabatan extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'namajabatan' => 'Nama Jabatan',
+            'pil_disposisi' => 'Pilihan Disposisi',
             'kelompok' => 'Kelompok',
         ];
     }
