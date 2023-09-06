@@ -19,6 +19,7 @@ use yii\grid\GridView;
             //'idpegawai',
             //'idgolongan',
             'golongan.kode_gol',
+            'golongan.pangkat',
             'tmt',
             // 'status',
             [
@@ -85,7 +86,21 @@ use yii\grid\GridView;
             'jabatan.namajabatan',
             'esl',
             'tmt',
-            'status',
+            // 'status',
+            [
+                'label' => 'Status',
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    if ($model->status == 0) {
+                        $stat = 'Tidak Aktif';
+                    }
+                    if ($model->status == 1) {
+                        $stat = 'Aktif';
+                    }
+                    return $stat;
+                },
+                'format' => 'html',
+            ],
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

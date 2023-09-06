@@ -78,20 +78,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'nip',
             'namapegawai',
             'jeniskelamin',
-            'statuskepegawaian',
+            // 'statuskepegawaian',
 //            [
 //                'format' => 'image',
 //                'value' => function($data) {
 //                    return $data->imageurl;
 //                },
 //            ],
-            [
-                'attribute' => 'Foto',
-                'format' => 'html',
-                'value' => function($data) {
-                    return Html::img($data->imageurl, ['width' => '100']);
-                },
-            ],
+            // [
+            //     'attribute' => 'Foto',
+            //     'format' => 'html',
+            //     'value' => function($data) {
+            //         return Html::img($data->imageurl, ['width' => '100']);
+            //     },
+            // ],
             //'no_serikarpeg',
             //'npwp',
             //'tempatlahir',

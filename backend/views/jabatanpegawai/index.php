@@ -36,7 +36,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'jabatan.namajabatan',
             'esl',
             'tmt',
-            'status',
+            // 'status',
+            [
+                'label' => 'Status',
+                'attribute' => 'status',
+                'value' => function ($model) {
+                    if ($model->status == 0) {
+                        $stat = 'Tidak Aktif';
+                    }
+                    if ($model->status == 1) {
+                        $stat = 'Aktif';
+                    }
+                    return $stat;
+                },
+                'format' => 'html',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

@@ -52,4 +52,8 @@ class Golonganpegawai extends \yii\db\ActiveRecord
     public function getGolongan() {
         return $this->hasOne(Golongan::className(), ['id'=>'idgolongan']);
     }
+
+    public function getPegawai() {
+        return $this->hasOne(Pegawai::className(), ['id'=>'idpegawai']);
+    }
 }

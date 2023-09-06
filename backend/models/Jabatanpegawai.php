@@ -53,4 +53,8 @@ class Jabatanpegawai extends \yii\db\ActiveRecord {
         return $this->hasOne(Jabatan::className(), ['id' => 'idjabatan']);
     }
 
+    public function getPegawai() {
+        return $this->hasOne(Pegawai::className(), ['id' => 'idpegawai']);
+    }
+
 }

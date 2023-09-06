@@ -11,19 +11,19 @@ use Yii;
  * @property string $nip
  * @property string $namapegawai
  * @property string $jeniskelamin
- * @property string $statuskepegawaian
- * @property string $no_serikarpeg
- * @property int $npwp
- * @property string $tempatlahir
- * @property string $tgllahir
+ * @property string|null $statuskepegawaian
+ * @property string|null $no_serikarpeg
+ * @property int|null $npwp
+ * @property string|null $tempatlahir
+ * @property string|null $tgllahir
  * @property string $alamat
  * @property int $hp
- * @property int $id_agama
- * @property int $gajipokok
- * @property string $berkalaakhir
- * @property string $statuskawin
- * @property string $email
- * @property string $catmutasi
+ * @property int|null $id_agama
+ * @property int|null $gajipokok
+ * @property string|null $berkalaakhir
+ * @property string|null $statuskawin
+ * @property string|null $email
+ * @property string|null $catmutasi
  * @property string|null $create_at
  * @property string|null $update_at
  * @property int|null $iduser
