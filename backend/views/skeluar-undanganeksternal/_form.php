@@ -46,7 +46,20 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
-    <?= $form->field($model, 'kepada')->textarea(['rows' => 6]) ?>
+    <?php //= $form->field($model, 'kepada')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
+        'clientOptions' => [
+            'plugins' => [
+                'anchor', 'charmap', 'code', 'help', 'hr',
+                'image', 'link', 'lists', 'media', 'paste',
+                'searchreplace', 'table',
+            ],
+            'height' => 400,
+            'convert_urls' => false,
+            'element_format' => 'html',
+            // ...
+        ],
+    ]) ?>
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [

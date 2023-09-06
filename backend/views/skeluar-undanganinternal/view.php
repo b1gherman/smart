@@ -36,7 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'hal',
             'tempat',
             'tanggal',
-            'kepada:ntext',
+            // 'kepada:ntext',
+            [
+                'label' => 'Kepada',
+                'attribute' => 'kepada',
+                'format' => 'html',
+            ],
             // 'isi:ntext',
             [
                 'label' => 'Isi Surat Undangan Internal',
