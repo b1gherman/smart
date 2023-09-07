@@ -66,8 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {report}',
+                'template' => '{view} {update} {delete} {report} {toword}',
                 'buttons' => [
+                    'toword' => function ($url, $model) {
+                        return Html::a('<span>Word</span>', $url, [
+                                    'title' => Yii::t('app', 'Word'),
+                                    'class' => 'btn btn-outline-info btn-xs',
+                        ]);
+                    },
                     'report' => function ($url, $model) {
                         return Html::a('<span class="fa fa-print"></span>', '', [
                                     'title' => Yii::t('app', 'Print'),

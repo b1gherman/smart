@@ -49,7 +49,7 @@
             <tr>
                 <td><br>
                 </td>
-                <td style="width: 100%; text-align: justify;" colspan="2"><?= Yii::$app->formatter->asHtml($model->isi) ?></td>
+                <td style="width: 100%; text-align: justify;" colspan="2"><?= $model->isi ?></td>
             </tr>
         </tbody>
     </table>

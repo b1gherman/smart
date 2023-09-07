@@ -13,13 +13,12 @@ use kartik\mpdf\Pdf;
 /**
  * SkeluarmemoController implements the CRUD actions for Skeluarmemo model.
  */
-class SkeluarmemoController extends Controller
-{
+class SkeluarmemoController extends Controller {
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -34,14 +33,13 @@ class SkeluarmemoController extends Controller
      * Lists all Skeluarmemo models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new SkeluarmemoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -51,10 +49,9 @@ class SkeluarmemoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -63,8 +60,7 @@ class SkeluarmemoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Skeluarmemo();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -87,7 +83,7 @@ class SkeluarmemoController extends Controller
         // }
 
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -98,8 +94,7 @@ class SkeluarmemoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         $filelama = $model->file_upload;
@@ -116,7 +111,6 @@ class SkeluarmemoController extends Controller
             if ($model->save(false)) {
                 // return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);
-
             }
         }
 
@@ -125,7 +119,7 @@ class SkeluarmemoController extends Controller
         // }
 
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -136,8 +130,7 @@ class SkeluarmemoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -150,8 +143,7 @@ class SkeluarmemoController extends Controller
      * @return Skeluarmemo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Skeluarmemo::findOne($id)) !== null) {
             return $model;
         }
@@ -187,7 +179,6 @@ class SkeluarmemoController extends Controller
         $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $modelinstansi = \backend\models\Instansi::findOne(1);
         // $ttd1 = \backend\models\Jabatanstruktural::findOne($model->ttd);
-        
         //Golongan
         // $modelgolpeg = \backend\models\Golonganpegawai::findOne(['idpegawai' => $model->id_pegawai, 'status' => 1]);
         // $modelgolongan = \backend\models\Golongan::findOne(['id' => $modelgolpeg->idgolongan]);
@@ -196,8 +187,8 @@ class SkeluarmemoController extends Controller
             'model' => $model,
             'modeljabpeg' => $modeljabpeg,
             'modelpegawai' => $modelpegawai,
-            // 'modelinstansi' => $modelinstansi,
-            // 'ttd1'=>$ttd1
+                // 'modelinstansi' => $modelinstansi,
+                // 'ttd1'=>$ttd1
                 // 'modelgolpeg' => $modelgolpeg,
                 // 'modelgolongan' => $modelgolongan
         ]);
@@ -234,4 +225,29 @@ class SkeluarmemoController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
+
+    public function actionToword($id) {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+        $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idttd, 'status' => 1]);
+        $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
+        $template = "memo.docx";
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+// Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+// Simple table
+        $templateProcessor->setValue('nomor', $model->nomor);
+        $templateProcessor->setValue('kepada', $model->idkepada0->namajabatan);
+        $templateProcessor->setValue('dari', $model->iddari0->namajabatan);
+        $templateProcessor->setValue('hal', $model->hal);
+        $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+
+        $filename = "memo_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
+    }
+
 }

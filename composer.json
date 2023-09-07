@@ -39,7 +39,8 @@
         "mdmsoft/yii2-ar-behaviors": "~1.0",
         "mdmsoft/yii2-widgets": "~1.0",
         "mdmsoft/yii2-autonumber": "*",
-        "alexantr/yii2-tinymce": "^1.0"
+        "alexantr/yii2-tinymce": "^1.0",
+        "phpoffice/phpword": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
