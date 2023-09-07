@@ -73,18 +73,19 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
     }
 
     public function getDiteruskan() {
-        $hasil = [];
+        $hasiljab = [];
         $idterus = json_decode($this->idditeruskan, true);
-        $c = 0;
+        // $c = 0;
         foreach ($idterus as $id) {
-            $c++;
-            $j = Jabatan::findOne($id);
+            // $c++;
+            // $jab = \backend\models\Jabatan::findOne(['id' => $id, 'kelompok' => 1]);
+            $jab = Jabatan::findOne($id);
             // echo '<pre>';
             // print_r($j->namajabatan);
             // exit;
-            $hasil[] = $j->namajabatan;
+            $hasiljab[] = $jab->namajabatan;
         }
-        return $hasil;
+        return $hasiljab;
     }
 
     public function getDataketdisposisi() {
