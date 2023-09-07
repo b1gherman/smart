@@ -117,19 +117,64 @@
             </tr>
         </tbody>
     </table>
+    <!--Start contoh -->
+    <?php
+    // $temppildis = $model->datapildisposisi;
+    // foreach ($temppildis as $valpildis) {
+    ?>
+    <!-- <tr>
+                    <td>&bull; <?php //= $valpildis 
+                                ?></td>
+                    <td>2</td>
+                </tr> -->
+    <?php
+    // }
+    ?>
+
+    <?php
+    // $pildisposisi2 = \backend\models\PilihanDisposisi::find()->where(['kelompok' => 2])->asArray()->all();
+    // foreach ($pildisposisi2 as $valpildis2) :
+    ?>
+    <!-- <td>&bull; <?php //= $valpildis2['pil_disposisi'] 
+                    ?></td> -->
+    <?php
+    // endforeach;
+    ?>
+    <!--End contoh -->
     <table style="width: 100%; border-collapse: collapse;" border="1">
         <tbody>
-            <?php
-            $temppildis = $model->datapildisposisi;
-            foreach ($temppildis as $valpildis) {
-            ?>
-                <tr>
-                    <td>&bull; <?= $valpildis ?></td>
-                    <td>2</td>
-                </tr>
-            <?php
-            }
-            ?>
+            <tr>
+                <td>
+                    <table style="width: 100%; border-collapse: collapse;" border="1">
+                        <tbody>
+                            <?php
+                            $pildisposisi1 = \backend\models\PilihanDisposisi::find()->where(['kelompok' => 1])->asArray()->all();
+                            foreach ($pildisposisi1 as $valpildis1) :
+                            ?>
+                                <tr>
+                                    <td>&bull; <?= $valpildis1['pil_disposisi'] ?></td>
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </td>
+                <td><table style="width: 100%; border-collapse: collapse;" border="1">
+                        <tbody>
+                            <?php
+                            $pildisposisi2 = \backend\models\PilihanDisposisi::find()->where(['kelompok' => 2])->asArray()->all();
+                            foreach ($pildisposisi2 as $valpildis2) :
+                            ?>
+                                <tr>
+                                    <td>&bull; <?= $valpildis2['pil_disposisi'] ?></td>
+                                </tr>
+                            <?php
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table></td>
+            </tr>
         </tbody>
     </table>
     <table style="width: 100%; border-collapse: collapse;" border="1">

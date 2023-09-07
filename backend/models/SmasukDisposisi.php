@@ -41,7 +41,7 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
     {
         return [
             [['tanggal_terima', 'tanggal', 'create_at', 'update_at', 'idditeruskan', 'idketdisposisi', 'idpildisposisi'], 'safe'],
-            [['hal','catatan'], 'string'],
+            [['hal', 'catatan'], 'string'],
             [['iduser'], 'integer'],
             [['nomor_agenda', 'nomor', 'file_upload'], 'string', 'max' => 100],
             [['asal_surat'], 'string', 'max' => 200],
@@ -72,23 +72,25 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getDiteruskan() {
+    public function getDiteruskan()
+    {
         $hasiljab = [];
         $idterus = json_decode($this->idditeruskan, true);
-        // $c = 0;
+        $c = 0;
         foreach ($idterus as $id) {
-            // $c++;
+            $c++;
             // $jab = \backend\models\Jabatan::findOne(['id' => $id, 'kelompok' => 1]);
             $jab = Jabatan::findOne($id);
-            // echo '<pre>';
-            // print_r($j->namajabatan);
-            // exit;
             $hasiljab[] = $jab->namajabatan;
+            // echo '<pre>';
+            // print_r($jab);
+            // exit;
         }
         return $hasiljab;
     }
 
-    public function getDataketdisposisi() {
+    public function getDataketdisposisi()
+    {
         $hasilketdis = [];
         $idket = json_decode($this->idketdisposisi, true);
         $d = 0;
@@ -100,7 +102,8 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
         return $hasilketdis;
     }
 
-    public function getDatapildisposisi() {
+    public function getDatapildisposisi()
+    {
         $hasilpildis = [];
         $idpil = json_decode($this->idpildisposisi, true);
         foreach ($idpil as $idp) {

@@ -189,7 +189,7 @@ class SmasukDisposisiController extends Controller
         // get your HTML raw content without any layouts or scripts
 
         $model = $this->findModel($id);
-        // $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idttd, 'status' => 1]);
+        // $modelpildisposisi1 = \backend\models\PilihanDisposisi::findOne(['kelompok' => 1]);
         // $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $modelinstansi = \backend\models\Instansi::findOne(1);
         // $ttd1 = \backend\models\Jabatanstruktural::findOne($model->ttd);
@@ -200,7 +200,7 @@ class SmasukDisposisiController extends Controller
 
         $content = $this->renderPartial('_reportDisposisi', [
             'model' => $model,
-            // 'modeljabpeg' => $modeljabpeg,
+            // 'modelpildisposisi1' => $modelpildisposisi1,
             // 'modelpegawai' => $modelpegawai,
             // 'modelinstansi' => $modelinstansi,
             // 'ttd1'=>$ttd1
