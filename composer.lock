@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fab1d1f5b19ea66ec72229502509c549",
+    "content-hash": "433d0e8e3c24c7064a1df505ff49ddef",
     "packages": [
         {
             "name": "alexantr/yii2-tinymce",
@@ -164,16 +164,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "b755b3e9ab895aed7f409ec48a1349f5b185f55f"
+                "reference": "fde1f76e2799dd877c176abde0ec836553246991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/b755b3e9ab895aed7f409ec48a1349f5b185f55f",
-                "reference": "b755b3e9ab895aed7f409ec48a1349f5b185f55f"
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/fde1f76e2799dd877c176abde0ec836553246991",
+                "reference": "fde1f76e2799dd877c176abde0ec836553246991"
             },
             "type": "bower-asset",
             "license": [
@@ -762,12 +762,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "8f4a40fdb3c4aa6dc1d80ab72f05d6f0dd9ab0a4"
+                "reference": "0731fae8e68dcc8a92e20f3b193c4d4ba537f850"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/8f4a40fdb3c4aa6dc1d80ab72f05d6f0dd9ab0a4",
-                "reference": "8f4a40fdb3c4aa6dc1d80ab72f05d6f0dd9ab0a4",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/0731fae8e68dcc8a92e20f3b193c4d4ba537f850",
+                "reference": "0731fae8e68dcc8a92e20f3b193c4d4ba537f850",
                 "shasum": ""
             },
             "default-branch": true,
@@ -818,7 +818,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-06-30T09:02:00+00:00"
+            "time": "2023-09-07T18:09:41+00:00"
         },
         {
             "name": "kartik-v/bootstrap-popover-x",
@@ -7480,5 +7480,5 @@
         "php": ">=5.6.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
