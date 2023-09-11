@@ -67,6 +67,8 @@ use yii\widgets\ActiveForm;
 
     <?php //= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
+
     <?php
     if ($role == 'admin') { ?>
         <?= $form->field($model, 'status')->dropDownList(['DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI',]) ?>
