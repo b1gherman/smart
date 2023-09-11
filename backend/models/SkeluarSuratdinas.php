@@ -15,9 +15,11 @@ use Yii;
  * @property string|null $tempat
  * @property string|null $tanggal
  * @property string|null $kepada
+ * @property string|null $di
  * @property string|null $isi
  * @property int|null $idttd
  * @property string|null $tembusan
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -25,6 +27,7 @@ use Yii;
  * @property int|null $iduser
  *
  * @property Jabatan $idttd0
+ * @property Template $idtemplate0
  */
 class SkeluarSuratdinas extends \yii\db\ActiveRecord
 {
@@ -45,9 +48,11 @@ class SkeluarSuratdinas extends \yii\db\ActiveRecord
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['kepada', 'isi', 'tembusan', 'status'], 'string'],
             [['idttd', 'iduser'], 'integer'],
+            [['di',], 'string', 'max' => 100],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['sifat', 'lampiran', 'hal', 'tempat'], 'string', 'max' => 200],
             [['idttd'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['idttd' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -65,9 +70,11 @@ class SkeluarSuratdinas extends \yii\db\ActiveRecord
             'tempat' => 'Tempat',
             'tanggal' => 'Tanggal',
             'kepada' => 'Kepada',
+            'di' => 'Di',
             'isi' => 'Isi Surat Dinas',
             'idttd' => 'Ttd',
             'tembusan' => 'Tembusan',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -84,6 +91,16 @@ class SkeluarSuratdinas extends \yii\db\ActiveRecord
     public function getIdttd0()
     {
         return $this->hasOne(Jabatan::className(), ['id' => 'idttd']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function beforeSave($insert)

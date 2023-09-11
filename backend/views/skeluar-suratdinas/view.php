@@ -37,18 +37,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'tempat',
             'tanggal',
             'kepada:ntext',
+            'di',
             // 'isi:ntext',
-            [
-                'label' => 'Isi Surat Dinas',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Surat Dinas',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             // 'idttd',
             [
                 'label' => 'Ttd',
                 'attribute' => 'idttd0.namajabatan'
             ],
-            'tembusan:ntext',
+            // 'tembusan:ntext',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',
