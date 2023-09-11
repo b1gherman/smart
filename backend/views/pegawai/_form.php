@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nip')->textInput() ?>
 
     <?= $form->field($model, 'namapegawai')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'gelar_depan')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'gelar_belakang')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'jeniskelamin')->dropDownList(['Laki-Laki' => 'Laki-Laki', 'Perempuan' => 'Perempuan',], ['prompt' => '']) ?>
 

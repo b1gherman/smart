@@ -72,8 +72,11 @@ class TemplateController extends Controller
             if($model->validate()){
                 $model->save();
                 if (!empty($gambar)) {
-                    $gambar->saveAs(Yii::getAlias('@webroot') . '/template/memo.docx');
-                    $model->file = 'memo.docx';
+                    // $gambar->saveAs(Yii::getAlias('@webroot') . '/template/memo.docx');
+                    // $model->file = 'memo.docx';
+                    // $model->save(FALSE);
+                    $gambar->saveAs(Yii::getAlias('@webroot') . '/template/'.$gambar);
+                    $model->file = $gambar;
                     $model->save(FALSE);
                 }
             }
@@ -101,8 +104,11 @@ class TemplateController extends Controller
 
             if($model->validate()){
                 if (!empty($gambar)) {
-                    $gambar->saveAs(Yii::getAlias('@webroot') . '/template/memo.docx');
-                    $model->file = 'memo.docx';
+                    // $gambar->saveAs(Yii::getAlias('@webroot') . '/template/memo.docx');
+                    // $model->file = 'memo.docx';
+                    // $model->save(FALSE);
+                    $gambar->saveAs(Yii::getAlias('@webroot') . '/template/'.$gambar);
+                    $model->file = $gambar;
                     $model->save(FALSE);
                 }
             }
@@ -148,7 +154,7 @@ class TemplateController extends Controller
         $download = $this->findModel($id);
         $namafile = null;
 
-        $path = Yii::getAlias('@webroot') .'/template/memo.docx';
+        $path = Yii::getAlias('@webroot') .'/template/'. $download->file;
 
         if ($path) {
             if (file_exists($path)) {

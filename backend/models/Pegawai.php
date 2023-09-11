@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string $nip
  * @property string $namapegawai
+ * @property string|null $gelar_depan
+ * @property string|null $gelar_belakang
  * @property string $jeniskelamin
  * @property string|null $statuskepegawaian
  * @property string|null $no_serikarpeg
@@ -55,7 +57,7 @@ class Pegawai extends \yii\db\ActiveRecord {
             [['tgllahir', 'berkalaakhir','tglcpns', 'create_at', 'update_at'], 'safe'],
             [['namapegawai'], 'string', 'max' => 100],
             [['no_serikarpeg'], 'string', 'max' => 10],
-            [['tempatlahir', 'email'], 'string', 'max' => 50],
+            [['tempatlahir', 'email', 'gelar_depan', 'gelar_belakang'], 'string', 'max' => 50],
             [['alamat', 'catmutasi'], 'string', 'max' => 200],
             [['foto'], 'string'],
             [['id_agama'], 'exist', 'skipOnError' => true, 'targetClass' => Agama::className(), 'targetAttribute' => ['id_agama' => 'id']],
@@ -70,6 +72,8 @@ class Pegawai extends \yii\db\ActiveRecord {
             'id' => 'ID',
             'nip' => 'Nip',
             'namapegawai' => 'Nama Pegawai',
+            'gelar_depan' => 'Gelar Depan',
+            'gelar_belakang' => 'Gelar Belakang',
             'jeniskelamin' => 'Jenis kelamin',
             'statuskepegawaian' => 'Status Kepegawaian',
             'no_serikarpeg' => 'No Seri Karpeg',

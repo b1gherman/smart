@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'nip',
             'namapegawai',
+            'gelar_depan',
+            'gelar_belakang',
             'jeniskelamin',
             // 'statuskepegawaian',
             // 'no_serikarpeg',

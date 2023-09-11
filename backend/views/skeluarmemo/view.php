@@ -44,17 +44,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'hal',
             'tanggal',
             // 'isimemo:ntext',
-            [
-                'label' => 'Isi Memo',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Memo',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             // 'idttd',
             [
                 'label' => 'Ttd',
                 'attribute' => 'idttd0.namajabatan'
             ],
-            'tembusan:ntext',
+            // 'tembusan:ntext',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             // [
             //     'label' => 'Status',

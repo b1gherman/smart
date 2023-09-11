@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $isi
  * @property int|null $idttd
  * @property string|null $tembusan
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -25,6 +26,7 @@ use Yii;
  * @property Jabatan $iddari0
  * @property Jabatan $idkepada0
  * @property Jabatan $idttd0
+ * @property Template $idtemplate0
  */
 class Skeluarmemo extends \yii\db\ActiveRecord
 {
@@ -50,6 +52,7 @@ class Skeluarmemo extends \yii\db\ActiveRecord
             [['iddari'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['iddari' => 'id']],
             [['idkepada'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['idkepada' => 'id']],
             [['idttd'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['idttd' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -68,6 +71,7 @@ class Skeluarmemo extends \yii\db\ActiveRecord
             'isi' => 'Isi Memo',
             'idttd' => 'Ttd',
             'tembusan' => 'Tembusan',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -104,6 +108,16 @@ class Skeluarmemo extends \yii\db\ActiveRecord
     public function getIdttd0()
     {
         return $this->hasOne(Jabatan::className(), ['id' => 'idttd']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function beforeSave($insert)

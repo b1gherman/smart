@@ -51,23 +51,25 @@ use yii\widgets\ActiveForm;
 
     <?php // $form->field($model, 'isi')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 500,
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 500,
+    //         // ...
+    //     ],
+    // ]) ?>
 
     <?php // $form->field($model, 'idttd')->textInput() 
     ?>
     <?= $form->field($model, 'idttd')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Jabatan::find()->all(), 'id', 'namajabatan')) ?>
 
-    <?= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
+    <?php //= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
 
     <?php
     if ($role == 'admin') { ?>
