@@ -67,19 +67,23 @@ class SkeluarTugasController extends Controller
     {
         $model = new SkeluarTugas();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $file = \yii\web\UploadedFile::getInstance($model, 'file_upload');
-            if ($file) {
-                $namafile = $file->name;
-                if ($file->saveAs(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $namafile)) {
-                    $model->file_upload = $namafile;
+        if ($this->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                $file = \yii\web\UploadedFile::getInstance($model, 'file_upload');
+                if ($file) {
+                    $namafile = $file->name;
+                    if ($file->saveAs(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $namafile)) {
+                        $model->file_upload = $namafile;
+                    }
+                }
+
+                if ($model->save(false)) {
+                    // return $this->redirect(['index']);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
-
-            if ($model->save(false)) {
-                // return $this->redirect(['index']);
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        } else {
+            $model->loadDefaultValues();
         }
 
         // if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -101,6 +105,7 @@ class SkeluarTugasController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->idpenerima = json_decode($model->idpenerima);
 
         $filelama = $model->file_upload;
         if ($model->load(Yii::$app->request->post())) {
@@ -116,7 +121,6 @@ class SkeluarTugasController extends Controller
             if ($model->save(false)) {
                 // return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);
-
             }
         }
 
@@ -159,20 +163,22 @@ class SkeluarTugasController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionPenerima($id) {
+    public function actionPenerima($id)
+    {
         $this->redirect(['skeluar-penerimatugas/create', 'id' => $id]);
     }
 
-    public function actionDeleteUpload() {
+    public function actionDeleteUpload()
+    {
 
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $keys = Yii::$app->request->post('key');
         $key = explode(' ', $keys);
 
         $model = SkeluarTugas::find()->where([
-                    'id' => $key[1],
-                        //'create_id' => Yii::$app->user->id
-                ])->one();
+            'id' => $key[1],
+            //'create_id' => Yii::$app->user->id
+        ])->one();
 
         if ($key[0] == 'file_upload') {
             @unlink(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $model->file_upload);
@@ -183,11 +189,12 @@ class SkeluarTugasController extends Controller
         return [];
     }
 
-    public function actionReport($id) {
+    public function actionReport($id)
+    {
         // get your HTML raw content without any layouts or scripts
 
         $model = $this->findModel($id);
-        
+
         //pemberi
         $modelpemberi = \backend\models\Pegawai::findOne(['id' => $model->idpemberi, 'aktif' => 1]);
         $modelgolpemberi = \backend\models\Golonganpegawai::findOne(['idpegawai' => $model->idpemberi, 'status' => 1]);
@@ -204,21 +211,21 @@ class SkeluarTugasController extends Controller
 
         $modelinstansi = \backend\models\Instansi::findOne(1);
         // $ttd1 = \backend\models\Jabatanstruktural::findOne($model->ttd);
-        
-        
+
+
 
         $content = $this->renderPartial('_reportTugas', [
             'model' => $model,
             'modelpemberi' => $modelpemberi,
-            'modelgolonganpemberi'=>$modelgolonganpemberi,
-            'modeljabatanpemberi'=>$modeljabatanpemberi,
+            'modelgolonganpemberi' => $modelgolonganpemberi,
+            'modeljabatanpemberi' => $modeljabatanpemberi,
             // 'modelpenerima' => $modelpenerima,
             // 'modelgolonganpenerima'=>$modelgolonganpenerima,
             // 'modeljabatanpenerima'=>$modeljabatanpenerima,
             'modelinstansi' => $modelinstansi,
             // 'ttd1'=>$ttd1
-                // 'modelgolpeg' => $modelgolpeg,
-                // 'modelgolongan' => $modelgolongan
+            // 'modelgolpeg' => $modelgolpeg,
+            // 'modelgolongan' => $modelgolongan
         ]);
 
         // setup kartik\mpdf\Pdf component
@@ -242,8 +249,8 @@ class SkeluarTugasController extends Controller
             'options' => ['title' => 'Krajee Report Title'],
             // call mPDF methods on the fly
             'methods' => [
-            //'SetHeader' => ['Barang Keluar'],
-            //'SetFooter' => ['{PAGENO}'],
+                //'SetHeader' => ['Barang Keluar'],
+                //'SetFooter' => ['{PAGENO}'],
             ],
             'marginTop' => 0,
             'marginLeft' => 0,
@@ -252,5 +259,59 @@ class SkeluarTugasController extends Controller
 
         // return the pdf output as per the destination setting
         return $pdf->render();
+    }
+
+    public function actionToword($id)
+    {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+        $modelpemberi = \backend\models\Pegawai::findOne(['id' => $model->idpemberi, 'aktif' => 1]);
+        $modelgolpemberi = \backend\models\Golonganpegawai::findOne(['idpegawai' => $model->idpemberi, 'status' => 1]);
+        $modelgolonganpemberi = \backend\models\Golongan::findOne(['id' => $modelgolpemberi->idgolongan]);
+        $modeljabpemberi = \backend\models\Jabatanpegawai::findOne(['idpegawai' => $model->idpemberi, 'status' => 1]);
+        $modeljabatanpemberi = \backend\models\Jabatan::findOne(['id' => $modeljabpemberi->idjabatan]);
+        $modelinstansi = \backend\models\Instansi::findOne(1);
+        // $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idpemberi, 'status' => 1]);
+        // $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
+        // $template = "memo.docx";
+        $template = $model->idtemplate0->file;
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+        // Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+        // Simple table
+        $templateProcessor->setValue('nomor', $model->nomor);
+        $templateProcessor->setValue('nama pemberi', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('nip pemberi', $modelpemberi->nip);
+        $templateProcessor->setValue('pangkat pemberi', $modelgolonganpemberi->pangkat);
+        $templateProcessor->setValue('golongan pemberi', $modelgolonganpemberi->kode_gol);
+        $templateProcessor->setValue('jabatan pemberi', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('unit organisasi', $modelinstansi->namainstansi);
+
+        $templateProcessor->setValue('tugas', $model->tugas);
+        $templateProcessor->setValue('selama', $model->selama);
+        $templateProcessor->setValue('lokasi', $model->lokasi);
+        $templateProcessor->setValue('tanggal berangkat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('sumber dana', $model->sumber_dana);
+        
+        $templateProcessor->setValue('tempat', $model->tempat);
+        $templateProcessor->setValue('tanggal surat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        
+        $templateProcessor->setValue('nama jabatan', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('nama lengkap', $modelpemberi->namapegawai);
+
+        $filename = "naskah_tugas_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        sleep(5);
+        $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
+        if (file_exists($path)) {
+            \Yii::$app->response->sendFile($path);
+            //return $this->redirect(['index']);
+        }
+        //\Yii::$app->session->setFlash("info", "File Tidak ada");
+        //return $this->redirect(['index']);
+        //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
     }
 }

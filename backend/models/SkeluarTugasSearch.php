@@ -18,7 +18,7 @@ class SkeluarTugasSearch extends SkeluarTugas
     {
         return [
             [['id', 'idpemberi', 'iduser'], 'integer'],
-            [['nomor', 'penerima', 'tugas', 'tanggal_tugas', 'selama', 'lokasi', 'keterangan', 'tempat', 'tanggal', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
+            [['nomor', 'idpenerima', 'tugas', 'tanggal_tugas', 'selama', 'lokasi', 'keterangan', 'tempat', 'tanggal', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
 
@@ -61,13 +61,14 @@ class SkeluarTugasSearch extends SkeluarTugas
             'id' => $this->id,
             'idpemberi' => $this->idpemberi,
             'tanggal' => $this->tanggal,
+            'idtemplate' => $this->idtemplate,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,
             'iduser' => $this->iduser,
         ]);
 
         $query->andFilterWhere(['like', 'nomor', $this->nomor])
-            ->andFilterWhere(['like', 'penerima', $this->penerima])
+            ->andFilterWhere(['like', 'idpenerima', $this->idpenerima])
             ->andFilterWhere(['like', 'tugas', $this->tugas])
             ->andFilterWhere(['like', 'tanggal_tugas', $this->tanggal_tugas])
             ->andFilterWhere(['like', 'selama', $this->selama])

@@ -26,35 +26,55 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?php //= $form->field($model, 'idpemberi')->textInput() ?>
+    <?php //= $form->field($model, 'idpemberi')->textInput() 
+    ?>
     <?= $form->field($model, 'idpemberi')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai')) ?>
 
-    <?php //= $form->field($model, 'penerima')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'penerima')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 400,
-            // ...
+    <?php //= $form->field($model, 'penerima')->textarea(['rows' => 6]) 
+    ?>
+    <?php //= $form->field($model, 'penerima')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 400,
+    //         // ...
+    //     ],
+    // ]) 
+    ?>
+
+    <?php
+    $data = yii\helpers\ArrayHelper::map(backend\models\Pegawai::find()->all(), 'id', 'namapegawai');
+    echo $form->field($model, 'idpenerima')->widget(\kartik\select2\Select2::classname(), [
+        'data' => $data,
+        'options' => ['placeholder' => 'Pilih Penerima...', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 10
         ],
-    ]) ?>
+    ])->label('Penerima Tugas');
+    ?>
+
 
     <?= $form->field($model, 'tugas')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'tanggal_tugas')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'selama')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'lokasi')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'tanggal_tugas')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'sumber_dana')->textInput(['maxlength' => true]) ?>
+
+    <?php //= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
-    <?php //= $form->field($model, 'tanggal')->textInput() ?>
+    <?php //= $form->field($model, 'tanggal')->textInput() 
+    ?>
     <?=
     $form->field($model, 'tanggal')->widget(kartik\date\DatePicker::className(), [
         'options' => ['placeholder' => 'Pilih Tanggal'],
@@ -67,8 +87,12 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
-    <?php //= $form->field($model, 'status')->dropDownList([ 'DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI', ], ['prompt' => '']) ?>
-    <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
+
+    <?php //= $form->field($model, 'status')->dropDownList([ 'DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI', ], ['prompt' => '']) 
+    ?>
+    <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) 
+    ?>
 
     <?php
     if ($role == 'admin') { ?>
@@ -151,11 +175,14 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?php //= $form->field($model, 'create_at')->textInput() ?>
+    <?php //= $form->field($model, 'create_at')->textInput() 
+    ?>
 
-    <?php //= $form->field($model, 'update_at')->textInput() ?>
+    <?php //= $form->field($model, 'update_at')->textInput() 
+    ?>
 
-    <?php //= $form->field($model, 'iduser')->textInput() ?>
+    <?php //= $form->field($model, 'iduser')->textInput() 
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

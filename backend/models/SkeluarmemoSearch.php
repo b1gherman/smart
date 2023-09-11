@@ -17,7 +17,7 @@ class SkeluarmemoSearch extends Skeluarmemo
     public function rules()
     {
         return [
-            [['id', 'idkepada', 'iddari', 'idttd', 'iduser'], 'integer'],
+            [['id', 'idkepada', 'iddari', 'idttd' , 'idtemplate', 'iduser'], 'integer'],
             [['nomor', 'hal', 'tanggal', 'isi', 'tembusan', 'create_at', 'update_at'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class SkeluarmemoSearch extends Skeluarmemo
             'iddari' => $this->iddari,
             'tanggal' => $this->tanggal,
             'idttd' => $this->idttd,
+            'idtemplate' => $this->idtemplate,
             'status' => $this->status,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,

@@ -48,24 +48,24 @@ use yii\widgets\ActiveForm;
     ?>
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table', 'template', 'preview'
-            ],
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table', 'template', 'preview'
+    //         ],
+    //         'height' => 500,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) ?>
 
     <?php //= $form->field($model, 'idttd')->textInput() ?>
     <?= $form->field($model, 'idttd')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Jabatan::find()->all(), 'id', 'namajabatan')) ?>
 
-    <?= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
+    <?php //= $form->field($model, 'tembusan')->textarea(['rows' => 6]) ?>
 
     <?php
     if ($role == 'admin') { ?>

@@ -10,14 +10,16 @@ use Yii;
  * @property int $id
  * @property string|null $nomor
  * @property int|null $idpemberi
- * @property string|null $penerima
+ * @property string|null $idpenerima
  * @property string|null $tugas
  * @property string|null $tanggal_tugas
  * @property string|null $selama
  * @property string|null $lokasi
+ * @property string|null $sumber_dana
  * @property string|null $keterangan
  * @property string|null $tempat
  * @property string|null $tanggal
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -25,6 +27,7 @@ use Yii;
  * @property int|null $iduser
  *
  * @property Pegawai $idpemberi0
+ * @property Template $idtemplate0
  */
 class SkeluarTugas extends \yii\db\ActiveRecord
 {
@@ -43,13 +46,14 @@ class SkeluarTugas extends \yii\db\ActiveRecord
     {
         return [
             [['idpemberi', 'iduser'], 'integer'],
-            [['penerima', 'tugas', 'keterangan', 'status'], 'string'],
-            [['tanggal', 'create_at', 'update_at'], 'safe'],
+            [['tugas', 'keterangan', 'status'], 'string'],
+            [['idpenerima','tanggal', 'create_at', 'update_at'], 'safe'],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['tanggal_tugas', 'selama'], 'string', 'max' => 50],
             [['lokasi'], 'string', 'max' => 500],
-            [['tempat'], 'string', 'max' => 200],
+            [['tempat','sumber_dana'], 'string', 'max' => 200],
             [['idpemberi'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpemberi' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -61,15 +65,17 @@ class SkeluarTugas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nomor' => 'Nomor',
-            'idpemberi' => 'Pemberi',
-            'penerima' => 'Penerima',
+            'idpemberi' => 'Pemberi Tugas',
+            'idpenerima' => 'Penerima Tugas',
             'tugas' => 'Tugas',
-            'tanggal_tugas' => 'Tanggal Tugas',
+            'tanggal_tugas' => 'Tanggal Berangkat',
             'selama' => 'Selama',
             'lokasi' => 'Lokasi',
+            'sumber_dana' => 'Sumber Dana',
             'keterangan' => 'Keterangan',
-            'tempat' => 'Tempat',
-            'tanggal' => 'Tanggal',
+            'tempat' => 'Tempat Surat Dikeluarkan',
+            'tanggal' => 'Tanggal Surat',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -88,10 +94,21 @@ class SkeluarTugas extends \yii\db\ActiveRecord
         return $this->hasOne(Pegawai::className(), ['id' => 'idpemberi']);
     }
 
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
+    }
+
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
             // Place your custom code here
+            $this->idpenerima = json_encode($this->idpenerima);
             if ($this->isNewRecord) {
                 $this->iduser = Yii::$app->user->Id;
                 $this->create_at = new \yii\db\Expression('NOW()');
