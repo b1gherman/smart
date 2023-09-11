@@ -42,18 +42,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'kepada',
                 'format' => 'html',
             ],
+            'di',
             // 'isi:ntext',
-            [
-                'label' => 'Isi Surat Undangan Eksternal',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Surat Undangan Eksternal',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             // 'idttd',
             [
                 'label' => 'Ttd',
                 'attribute' => 'idttd0.namajabatan'
             ],
-            'tembusan:ntext',
+            // 'tembusan:ntext',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',

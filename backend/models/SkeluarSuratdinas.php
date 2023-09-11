@@ -48,7 +48,7 @@ class SkeluarSuratdinas extends \yii\db\ActiveRecord
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['kepada', 'isi', 'tembusan', 'status'], 'string'],
             [['idttd', 'iduser'], 'integer'],
-            [['di',], 'string', 'max' => 100],
+            [['di',], 'string', 'max' => 50],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['sifat', 'lampiran', 'hal', 'tempat'], 'string', 'max' => 200],
             [['idttd'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['idttd' => 'id']],
