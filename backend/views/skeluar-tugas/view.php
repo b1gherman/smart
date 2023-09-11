@@ -45,6 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'keterangan:ntext',
             'tempat',
             'tanggal',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',
