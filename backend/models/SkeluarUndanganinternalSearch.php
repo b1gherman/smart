@@ -17,8 +17,8 @@ class SkeluarUndanganinternalSearch extends SkeluarUndanganinternal
     public function rules()
     {
         return [
-            [['id', 'idttd', 'iduser'], 'integer'],
-            [['nomor', 'sifat', 'lampiran', 'hal', 'tempat', 'tanggal', 'kepada', 'isi', 'tembusan', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
+            [['id', 'idttd', 'idtemplate', 'iduser'], 'integer'],
+            [['nomor', 'sifat', 'lampiran', 'hal', 'tempat', 'tanggal', 'kepada', 'di', 'isi', 'tembusan', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
 
@@ -61,6 +61,7 @@ class SkeluarUndanganinternalSearch extends SkeluarUndanganinternal
             'id' => $this->id,
             'tanggal' => $this->tanggal,
             'idttd' => $this->idttd,
+            'idtemplate' => $this->idtemplate,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,
             'iduser' => $this->iduser,
@@ -72,6 +73,7 @@ class SkeluarUndanganinternalSearch extends SkeluarUndanganinternal
             ->andFilterWhere(['like', 'hal', $this->hal])
             ->andFilterWhere(['like', 'tempat', $this->tempat])
             ->andFilterWhere(['like', 'kepada', $this->kepada])
+            ->andFilterWhere(['like', 'di', $this->di])
             ->andFilterWhere(['like', 'isi', $this->isi])
             ->andFilterWhere(['like', 'tembusan', $this->tembusan])
             ->andFilterWhere(['like', 'status', $this->status])

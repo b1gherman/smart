@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $isi
  * @property string|null $tempat
  * @property string|null $tanggal
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -24,6 +25,7 @@ use Yii;
  *
  * @property Pegawai $idpemberi0
  * @property Pegawai $idpenerima0
+ * @property Template $idtemplate0
  */
 class SkeluarKeterangan extends \yii\db\ActiveRecord
 {
@@ -41,13 +43,14 @@ class SkeluarKeterangan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idpemberi', 'idpenerima', 'iduser'], 'integer'],
+            [['idpemberi', 'idpenerima', 'idtemplate', 'iduser'], 'integer'],
             [['hal', 'isi', 'status'], 'string'],
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['namasurat', 'tempat'], 'string', 'max' => 200],
             [['idpemberi'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpemberi' => 'id']],
             [['idpenerima'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpenerima' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -64,8 +67,9 @@ class SkeluarKeterangan extends \yii\db\ActiveRecord
             'hal' => 'Hal',
             'idpenerima' => 'Penerima',
             'isi' => 'Isi Keterangan',
-            'tempat' => 'Tempat',
+            'tempat' => 'Tempat Surat Dikeluarkan',
             'tanggal' => 'Tanggal',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -92,6 +96,16 @@ class SkeluarKeterangan extends \yii\db\ActiveRecord
     public function getIdpenerima0()
     {
         return $this->hasOne(Pegawai::className(), ['id' => 'idpenerima']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function beforeSave($insert)

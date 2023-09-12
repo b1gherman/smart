@@ -31,26 +31,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nomor',
-            'namasurat',
+            // 'namasurat',
             // 'idpemberi',
             [
                 'label' => 'Pemberi',
                 'attribute' => 'idpemberi0.namapegawai'
             ],
-            'hal:ntext',
+            // 'hal:ntext',
             // 'idpenerima',
             [
                 'label' => 'Penerima',
                 'attribute' => 'idpenerima0.namapegawai'
             ],
             // 'isi:ntext',
-            [
-                'label' => 'Isi Keterangan',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Keterangan',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             'tempat',
             'tanggal',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',

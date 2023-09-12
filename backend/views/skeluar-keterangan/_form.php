@@ -26,15 +26,15 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?= $form->field($model, 'namasurat')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'namasurat')->textInput(['maxlength' => true]) ?>
 
     <label class="col-form-label">Yang bertandatangan di bawah ini :</label>
     <?php //= $form->field($model, 'idpemberi')->textInput()->label(false) 
     ?>
     <?= $form->field($model, 'idpemberi')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai'))->label(false) ?>
 
-    <label class="col-form-label">dengan ini menerangkan bahwa :</label>
-    <?= $form->field($model, 'hal')->textarea(['rows' => 6])->label(false) ?>
+    <!-- <label class="col-form-label">dengan ini menerangkan bahwa :</label> -->
+    <?php //= $form->field($model, 'hal')->textarea(['rows' => 6])->label(false) ?>
 
     <?php //= $form->field($model, 'idpenerima')->textInput() 
     ?>
@@ -42,19 +42,19 @@ use yii\widgets\ActiveForm;
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 500,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
@@ -71,6 +71,8 @@ use yii\widgets\ActiveForm;
         ]
     ])
     ?>
+
+<?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
 
     <?php
     if ($role == 'admin') { ?>

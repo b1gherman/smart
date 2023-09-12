@@ -17,7 +17,7 @@ class SkeluarKeteranganSearch extends SkeluarKeterangan
     public function rules()
     {
         return [
-            [['id', 'idpemberi', 'idpenerima', 'iduser'], 'integer'],
+            [['id', 'idpemberi', 'idpenerima','idtemplate', 'iduser'], 'integer'],
             [['nomor', 'namasurat', 'hal', 'isi', 'tempat', 'tanggal', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class SkeluarKeteranganSearch extends SkeluarKeterangan
             'id' => $this->id,
             'idpemberi' => $this->idpemberi,
             'idpenerima' => $this->idpenerima,
+            'idtemplate' => $this->idtemplate,
             'tanggal' => $this->tanggal,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,
