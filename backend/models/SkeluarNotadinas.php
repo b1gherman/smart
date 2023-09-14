@@ -44,7 +44,7 @@ class SkeluarNotadinas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idkepada', 'iddari', 'idttd', 'iduser'], 'integer'],
+            [['idkepada', 'iddari','idtemplate', 'idttd', 'iduser'], 'integer'],
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['isi', 'tembusan', 'status'], 'string'],
             [['nomor', 'file_upload'], 'string', 'max' => 100],

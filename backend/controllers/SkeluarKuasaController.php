@@ -272,6 +272,10 @@ class SkeluarKuasaController extends Controller
         // $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idpemberi, 'status' => 1]);
         // $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 
@@ -281,15 +285,15 @@ class SkeluarKuasaController extends Controller
         //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
         // Simple table
         $templateProcessor->setValue('nomor', $model->nomor);
-        $templateProcessor->setValue('nama pemberi', $modelpemberi->namapegawai);
-        $templateProcessor->setValue('nip pemberi', $modelpemberi->nip);
-        $templateProcessor->setValue('jabatan pemberi', $modeljabatanpemberi->namajabatan);
-        $templateProcessor->setValue('alamat pemberi', $modelpemberi->alamat);
+        $templateProcessor->setValue('namapemberi', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('nippemberi', $modelpemberi->nip);
+        $templateProcessor->setValue('jabatanpemberi', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('alamatpemberi', $modelpemberi->alamat);
 
-        $templateProcessor->setValue('nama penerima', $modelpenerima->namapegawai);
-        $templateProcessor->setValue('nip penerima', $modelpenerima->nip);
-        $templateProcessor->setValue('jabatan penerima', $modeljabatanpenerima->namajabatan);
-        $templateProcessor->setValue('alamat penerima', $modelpenerima->alamat);
+        $templateProcessor->setValue('namapenerima', $modelpenerima->namapegawai);
+        $templateProcessor->setValue('nippenerima', $modelpenerima->nip);
+        $templateProcessor->setValue('jabatanpenerima', $modeljabatanpenerima->namajabatan);
+        $templateProcessor->setValue('alamatpenerima', $modelpenerima->alamat);
         
         $templateProcessor->setValue('tempat', $model->tempat);
         $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));

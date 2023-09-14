@@ -272,6 +272,10 @@ class SkeluarKeteranganController extends Controller
         // $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idpemberi, 'status' => 1]);
         // $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 
@@ -281,24 +285,24 @@ class SkeluarKeteranganController extends Controller
         //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
         // Simple table
         $templateProcessor->setValue('nomor', $model->nomor);
-        $templateProcessor->setValue('nama pemberi', $modelpemberi->namapegawai);
-        $templateProcessor->setValue('nip pemberi', $modelpemberi->nip);
-        $templateProcessor->setValue('pangkat pemberi', $modelgolonganpemberi->pangkat);
-        $templateProcessor->setValue('golongan pemberi', $modelgolonganpemberi->kode_gol);
-        $templateProcessor->setValue('jabatan pemberi', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('namapemberi', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('nippemberi', $modelpemberi->nip);
+        $templateProcessor->setValue('pangkatpemberi', $modelgolonganpemberi->pangkat);
+        $templateProcessor->setValue('golonganpemberi', $modelgolonganpemberi->kode_gol);
+        $templateProcessor->setValue('jabatanpemberi', $modeljabatanpemberi->namajabatan);
 
-        $templateProcessor->setValue('nama penerima', $modelpenerima->namapegawai);
-        $templateProcessor->setValue('nip penerima', $modelpenerima->nip);
-        $templateProcessor->setValue('pangkat penerima', $modelgolonganpenerima->pangkat);
-        $templateProcessor->setValue('golongan penerima', $modelgolonganpenerima->kode_gol);
-        $templateProcessor->setValue('jabatan penerima', $modeljabatanpenerima->namajabatan);
+        $templateProcessor->setValue('namapenerima', $modelpenerima->namapegawai);
+        $templateProcessor->setValue('nippenerima', $modelpenerima->nip);
+        $templateProcessor->setValue('pangkatpenerima', $modelgolonganpenerima->pangkat);
+        $templateProcessor->setValue('golonganpenerima', $modelgolonganpenerima->kode_gol);
+        $templateProcessor->setValue('jabatanpenerima', $modeljabatanpenerima->namajabatan);
         
         
         $templateProcessor->setValue('tempat', $model->tempat);
         $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
         
-        $templateProcessor->setValue('nama jabatan', $modeljabatanpemberi->namajabatan);
-        $templateProcessor->setValue('nama lengkap', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('namajabatan', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('namalengkap', $modelpemberi->namapegawai);
 
         $filename = "naskahkeluar_keterangan_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);

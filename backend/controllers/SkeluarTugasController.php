@@ -283,36 +283,36 @@ class SkeluarTugasController extends Controller {
         //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
         // Simple table
         $templateProcessor->setValue('nomor', $model->nomor);
-        $templateProcessor->setValue('nama pemberi', $modelpemberi->namapegawai);
-        $templateProcessor->setValue('nip pemberi', $modelpemberi->nip);
-        $templateProcessor->setValue('pangkat pemberi', $modelgolonganpemberi->pangkat);
-        $templateProcessor->setValue('golongan pemberi', $modelgolonganpemberi->kode_gol);
-        $templateProcessor->setValue('jabatan pemberi', $modeljabatanpemberi->namajabatan);
-        $templateProcessor->setValue('unit organisasi', $modelinstansi->namainstansi);
+        $templateProcessor->setValue('namapemberi', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('nippemberi', $modelpemberi->nip);
+        $templateProcessor->setValue('pangkatpemberi', $modelgolonganpemberi->pangkat);
+        $templateProcessor->setValue('golonganpemberi', $modelgolonganpemberi->kode_gol);
+        $templateProcessor->setValue('jabatanpemberi', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('unitorganisasi', $modelinstansi->namainstansi);
 
-        $templateProcessor->setValue('nama penerima1', $penerima1->namapegawai);
-        $templateProcessor->setValue('nip penerima1', $penerima1->nip);
-        $templateProcessor->setValue('pangkat penerima1', $penerima1->pangkat);
-        $templateProcessor->setValue('golongan penerima1', $penerima1->golongan);
-        $templateProcessor->setValue('jabatan penerima1', $penerima1->jabatan);
+        $templateProcessor->setValue('namapenerima1', $penerima1->namapegawai);
+        $templateProcessor->setValue('nippenerima1', $penerima1->nip);
+        $templateProcessor->setValue('pangkatpenerima1', $penerima1->pangkat);
+        $templateProcessor->setValue('golonganpenerima1', $penerima1->golongan);
+        $templateProcessor->setValue('jabatanpenerima1', $penerima1->jabatan);
 
-        $templateProcessor->setValue('nama penerima2', $penerima2->namapegawai);
-        $templateProcessor->setValue('nip penerima2', $penerima2->nip);
-        $templateProcessor->setValue('pangkat penerima2', $penerima2->pangkat);
-        $templateProcessor->setValue('golongan penerima2', $penerima2->golongan);
-        $templateProcessor->setValue('jabatan penerima2', $penerima2->jabatan);
+        $templateProcessor->setValue('namapenerima2', $penerima2->namapegawai);
+        $templateProcessor->setValue('nippenerima2', $penerima2->nip);
+        $templateProcessor->setValue('pangkatpenerima2', $penerima2->pangkat);
+        $templateProcessor->setValue('golonganpenerima2', $penerima2->golongan);
+        $templateProcessor->setValue('jabatanpenerima2', $penerima2->jabatan);
 
         $templateProcessor->setValue('tugas', $model->tugas);
         $templateProcessor->setValue('selama', $model->selama);
         $templateProcessor->setValue('lokasi', $model->lokasi);
-        $templateProcessor->setValue('tanggal berangkat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
-        $templateProcessor->setValue('sumber dana', $model->sumber_dana);
+        $templateProcessor->setValue('tanggalberangkat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('sumberdana', $model->sumber_dana);
 
         $templateProcessor->setValue('tempat', $model->tempat);
-        $templateProcessor->setValue('tanggal surat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('tanggalsurat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
 
-        $templateProcessor->setValue('nama jabatan', $modeljabatanpemberi->namajabatan);
-        $templateProcessor->setValue('nama lengkap', $modelpemberi->namapegawai);
+        $templateProcessor->setValue('namajabatan', $modeljabatanpemberi->namajabatan);
+        $templateProcessor->setValue('namalengkap', $modelpemberi->namapegawai);
 
         $filename = "naskahkeluar_tugas_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);

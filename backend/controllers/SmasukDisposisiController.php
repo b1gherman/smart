@@ -245,6 +245,10 @@ class SmasukDisposisiController extends Controller
         //return \Yii::$app->basePath;
         $model = $this->findModel($id);
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 

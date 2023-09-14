@@ -44,7 +44,7 @@ class Skeluarmemo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idkepada', 'iddari', 'idttd', 'iduser'], 'integer'],
+            [['idkepada', 'iddari', 'idtemplate', 'idttd', 'iduser'], 'integer'],
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['isi', 'tembusan', 'status', 'file_upload'], 'string'],
             [['nomor'], 'string', 'max' => 100],

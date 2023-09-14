@@ -245,6 +245,10 @@ class SkeluarPengumumanController extends Controller
         $modeljabatanpembuat = \backend\models\Jabatan::findOne(['id' => $modeljabpembuat->idjabatan]);
 
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 
@@ -259,8 +263,8 @@ class SkeluarPengumumanController extends Controller
         $templateProcessor->setValue('tempat', $model->tempat);
         $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
         
-        $templateProcessor->setValue('Nama Jabatan', $modeljabatanpembuat->namajabatan);
-        $templateProcessor->setValue('Nama Lengkap', $model->idpembuat0->namapegawai);
+        $templateProcessor->setValue('namajabatan', $modeljabatanpembuat->namajabatan);
+        $templateProcessor->setValue('namalengkap', $model->idpembuat0->namapegawai);
 
         $filename = "naskahkeluar_pengumuman_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);

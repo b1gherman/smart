@@ -241,6 +241,10 @@ class SkeluarUndanganinternalController extends Controller
         $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idttd, 'status' => 1]);
         $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 
@@ -257,8 +261,8 @@ class SkeluarUndanganinternalController extends Controller
         $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
         $templateProcessor->setValue('kepada', $model->kepada);
         $templateProcessor->setValue('di', $model->di);
-        $templateProcessor->setValue('Nama Jabatan', $model->idttd0->namajabatan);
-        $templateProcessor->setValue('Nama Lengkap', $modelpegawai->namapegawai);
+        $templateProcessor->setValue('namajabatan', $model->idttd0->namajabatan);
+        $templateProcessor->setValue('namalengkap', $modelpegawai->namapegawai);
 
         $filename = "naskahkeluar_undanganinternal_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
