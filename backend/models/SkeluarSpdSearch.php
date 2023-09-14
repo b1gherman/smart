@@ -17,7 +17,7 @@ class SkeluarSpdSearch extends SkeluarSpd
     public function rules()
     {
         return [
-            [['id', 'idppk', 'idppd', 'lama', 'idanggaran_instansi', 'iduser'], 'integer'],
+            [['id', 'idppk', 'idppd','idsurattugas','idtemplate', 'lama', 'idanggaran_instansi', 'iduser'], 'integer'],
             [['nomor', 'tingkat_biaya', 'maksud', 'alat_angkut', 'tempat_berangkat', 'tujuan', 'tgl_berangkat', 'tgl_kembali', 'anggaran_akun', 'keterangan_lain', 'tempat', 'tanggal', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
@@ -61,11 +61,13 @@ class SkeluarSpdSearch extends SkeluarSpd
             'id' => $this->id,
             'idppk' => $this->idppk,
             'idppd' => $this->idppd,
+            'idsurattugas' => $this->idsurattugas,
             'lama' => $this->lama,
             'tgl_berangkat' => $this->tgl_berangkat,
             'tgl_kembali' => $this->tgl_kembali,
             'idanggaran_instansi' => $this->idanggaran_instansi,
             'tanggal' => $this->tanggal,
+            'idtemplate' => $this->idtemplate,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,
             'iduser' => $this->iduser,

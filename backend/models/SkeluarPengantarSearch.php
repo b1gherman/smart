@@ -17,8 +17,8 @@ class SkeluarPengantarSearch extends SkeluarPengantar
     public function rules()
     {
         return [
-            [['id', 'idpengirim', 'iduser'], 'integer'],
-            [['nomor', 'tempat', 'tanggal', 'kepada', 'isi', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
+            [['id', 'idpengirim', 'idtemplate', 'iduser'], 'integer'],
+            [['nomor', 'tempat', 'tanggal', 'kepada','di', 'isi', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
 
@@ -60,6 +60,7 @@ class SkeluarPengantarSearch extends SkeluarPengantar
         $query->andFilterWhere([
             'id' => $this->id,
             'idpengirim' => $this->idpengirim,
+            'idtemplate' => $this->idtemplate,
             'tanggal' => $this->tanggal,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,
@@ -69,6 +70,7 @@ class SkeluarPengantarSearch extends SkeluarPengantar
         $query->andFilterWhere(['like', 'nomor', $this->nomor])
             ->andFilterWhere(['like', 'tempat', $this->tempat])
             ->andFilterWhere(['like', 'kepada', $this->kepada])
+            ->andFilterWhere(['like', 'di', $this->di])
             ->andFilterWhere(['like', 'isi', $this->isi])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'file_upload', $this->file_upload]);

@@ -14,6 +14,7 @@ use Yii;
  * @property string|null $isi
  * @property string|null $tempat
  * @property string|null $tanggal
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -21,6 +22,7 @@ use Yii;
  * @property int|null $iduser
  *
  * @property Pegawai $idpembuat0
+ * @property Template $idtemplate0
  */
 class SkeluarPengumuman extends \yii\db\ActiveRecord
 {
@@ -38,12 +40,13 @@ class SkeluarPengumuman extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idpembuat', 'iduser'], 'integer'],
+            [['idpembuat','idtemplate', 'iduser'], 'integer'],
             [['tentang', 'isi', 'status'], 'string'],
             [['tanggal', 'create_at', 'update_at'], 'safe'],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['tempat'], 'string', 'max' => 200],
             [['idpembuat'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpembuat' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -58,8 +61,9 @@ class SkeluarPengumuman extends \yii\db\ActiveRecord
             'idpembuat' => 'Pembuat',
             'tentang' => 'Tentang',
             'isi' => 'Isi Pengumuman',
-            'tempat' => 'Ditetapkan di',
+            'tempat' => 'Dikeluarkan di',
             'tanggal' => 'Tanggal',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -76,6 +80,16 @@ class SkeluarPengumuman extends \yii\db\ActiveRecord
     public function getIdpembuat0()
     {
         return $this->hasOne(Pegawai::className(), ['id' => 'idpembuat']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function beforeSave($insert)

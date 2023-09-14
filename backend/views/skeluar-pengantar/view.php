@@ -38,17 +38,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'tempat',
             'tanggal',
-            // 'kepada:ntext',
-            [
-                'label' => 'Kepada',
-                'attribute' => 'kepada',
-                'format' => 'html',
-            ],
+            'kepada',
+            'di',
             // 'isi:ntext',
+            // [
+            //     'label' => 'Isi',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             [
-                'label' => 'Isi',
-                'attribute' => 'isi',
-                'format' => 'html',
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
             ],
             'status',
             'file_upload',

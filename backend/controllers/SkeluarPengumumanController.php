@@ -234,4 +234,44 @@ class SkeluarPengumumanController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
+
+    public function actionToword($id)
+    {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+
+        //pembuat
+        $modeljabpembuat = \backend\models\Jabatanpegawai::findOne(['idpegawai' => $model->idpembuat, 'status' => 1]);
+        $modeljabatanpembuat = \backend\models\Jabatan::findOne(['id' => $modeljabpembuat->idjabatan]);
+
+        // $template = "memo.docx";
+        $template = $model->idtemplate0->file;
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+        // Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+        // Simple table
+
+        $templateProcessor->setValue('nomor', $model->nomor);
+        
+        $templateProcessor->setValue('tempat', $model->tempat);
+        $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        
+        $templateProcessor->setValue('Nama Jabatan', $modeljabatanpembuat->namajabatan);
+        $templateProcessor->setValue('Nama Lengkap', $model->idpembuat0->namapegawai);
+
+        $filename = "naskahkeluar_pengumuman_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        sleep(5);
+        $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
+        if (file_exists($path)) {
+            \Yii::$app->response->sendFile($path);
+            //return $this->redirect(['index']);
+        }
+        //\Yii::$app->session->setFlash("info", "File Tidak ada");
+        //return $this->redirect(['index']);
+        //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
+    }
 }

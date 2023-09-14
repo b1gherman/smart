@@ -36,51 +36,54 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tingkat_biaya')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'maksud')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'maksud')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'alat_angkut')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'alat_angkut')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'alat_angkut')->dropDownList(['Kendaraan Dinas' => 'Kendaraan Dinas', 'Kendaraan Umum' => 'Kendaraan Umum',]) ?>
 
-    <?= $form->field($model, 'tempat_berangkat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'idsurattugas')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\SkeluarTugas::find()->all(), 'id', 'nomor')) ?>
 
-    <?= $form->field($model, 'tujuan')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'tempat_berangkat')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'lama')->textInput() ?>
+    <?php //= $form->field($model, 'tujuan')->textInput(['maxlength' => true]) ?>
+
+    <?php //= $form->field($model, 'lama')->textInput() ?>
 
     <?php //= $form->field($model, 'tgl_berangkat')->textInput() 
     ?>
-    <?=
-    $form->field($model, 'tgl_berangkat')->widget(kartik\date\DatePicker::className(), [
-        'options' => ['placeholder' => 'Pilih Tanggal'],
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-mm-dd',
-            'starView' => 0,
-            'todayHighlight' => true
-        ]
-    ])
+    <?php //=
+    // $form->field($model, 'tgl_berangkat')->widget(kartik\date\DatePicker::className(), [
+    //     'options' => ['placeholder' => 'Pilih Tanggal'],
+    //     'pluginOptions' => [
+    //         'autoclose' => true,
+    //         'format' => 'yyyy-mm-dd',
+    //         'starView' => 0,
+    //         'todayHighlight' => true
+    //     ]
+    // ])
     ?>
 
     <?php //= $form->field($model, 'tgl_kembali')->textInput() 
     ?>
-    <?=
-    $form->field($model, 'tgl_kembali')->widget(kartik\date\DatePicker::className(), [
-        'options' => ['placeholder' => 'Pilih Tanggal'],
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-mm-dd',
-            'starView' => 0,
-            'todayHighlight' => true
-        ]
-    ])
+    <?php //=
+    // $form->field($model, 'tgl_kembali')->widget(kartik\date\DatePicker::className(), [
+    //     'options' => ['placeholder' => 'Pilih Tanggal'],
+    //     'pluginOptions' => [
+    //         'autoclose' => true,
+    //         'format' => 'yyyy-mm-dd',
+    //         'starView' => 0,
+    //         'todayHighlight' => true
+    //     ]
+    // ])
     ?>
 
     <?php //= $form->field($model, 'idanggaran_instansi')->textInput() 
     ?>
-    <?= $form->field($model, 'idanggaran_instansi')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Instansi::find()->all(), 'id', 'namainstansi')) ?>
+    <?php //= $form->field($model, 'idanggaran_instansi')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Instansi::find()->all(), 'id', 'namainstansi')) ?>
 
-    <?= $form->field($model, 'anggaran_akun')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'anggaran_akun')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'keterangan_lain')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'keterangan_lain')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
@@ -97,6 +100,8 @@ use yii\widgets\ActiveForm;
         ]
     ])
     ?>
+
+<?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
 
     <?php //= $form->field($model, 'status')->dropDownList([ 'DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI', ], ['prompt' => '']) 
     ?>

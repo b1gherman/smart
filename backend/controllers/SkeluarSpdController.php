@@ -240,4 +240,59 @@ class SkeluarSpdController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
+
+    public function actionToword($id) {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+        $modelgolppd = \backend\models\Golonganpegawai::findOne(['idpegawai' => $model->idppd, 'status' => 1]);
+        $modelgolonganppd = \backend\models\Golongan::findOne(['id' => $modelgolppd->idgolongan]);
+        $modeljabppd = \backend\models\Jabatanpegawai::findOne(['idpegawai' => $model->idppd, 'status' => 1]);
+        $modeljabatanppd = \backend\models\Jabatan::findOne(['id' => $modeljabppd->idjabatan]);
+        $modelsurattugas = \backend\models\SkeluarTugas::findOne(['id' => $model->idsurattugas]);
+        
+        // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
+        $template = $model->idtemplate0->file;
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+        // Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+        // Simple table
+        $templateProcessor->setValue('nomor', $model->nomor);
+        $templateProcessor->setValue('gelardepanppk', $model->idppk0->gelar_depan);
+        $templateProcessor->setValue('namappk', $model->idppk0->namapegawai);
+        $templateProcessor->setValue('gelarbelakangppk', $model->idppk0->gelar_belakang);
+        
+        $templateProcessor->setValue('gelardepanppd', $model->idppd0->gelar_depan);
+        $templateProcessor->setValue('namappd', $model->idppd0->namapegawai);
+        $templateProcessor->setValue('gelarbelakangppd', $model->idppd0->gelar_belakang);
+        $templateProcessor->setValue('nipppd', $model->idppd0->nip);
+        $templateProcessor->setValue('pangkatppd', $modelgolonganppd->pangkat);
+        $templateProcessor->setValue('golonganppd', $modelgolonganppd->kode_gol);
+        $templateProcessor->setValue('jabatanppd', $modeljabatanppd->namajabatan);
+
+        $templateProcessor->setValue('maksud', $modelsurattugas->tugas);
+        $templateProcessor->setValue('alatangkut', $model->alat_angkut);
+        $templateProcessor->setValue('tujuan', $modelsurattugas->lokasi);
+        $templateProcessor->setValue('lama', $modelsurattugas->selama);
+        $templateProcessor->setValue('tanggalberangkat', $modelsurattugas->tanggal_tugas);
+        $templateProcessor->setValue('nomorsurattugas', $modelsurattugas->nomor);
+        
+        $filename = "naskahkeluar_spd_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        sleep(5);
+        $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
+        if (file_exists($path)) {
+            \Yii::$app->response->sendFile($path);
+            //return $this->redirect(['index']);
+        }
+        //\Yii::$app->session->setFlash("info", "File Tidak ada");
+        //return $this->redirect(['index']);
+        //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
+    }
 }

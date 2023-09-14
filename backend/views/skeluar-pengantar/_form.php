@@ -46,37 +46,45 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
+    <?= $form->field($model, 'kepada')->textInput(['maxlength' => true]) ?>
+
     <?php //= $form->field($model, 'kepada')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 300,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 300,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) 
+    ?>
+
+    <?= $form->field($model, 'di')->textInput(['maxlength' => true]) ?>
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 500,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) 
+    ?>
+
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
 
     <?php
     if ($role == 'admin') { ?>

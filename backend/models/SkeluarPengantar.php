@@ -13,7 +13,9 @@ use Yii;
  * @property string|null $tempat
  * @property string|null $tanggal
  * @property string|null $kepada
+ * @property string|null $di
  * @property string|null $isi
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -21,6 +23,7 @@ use Yii;
  * @property int|null $iduser
  *
  * @property Pegawai $idpengirim0
+ * @property Template $idtemplate0
  */
 class SkeluarPengantar extends \yii\db\ActiveRecord
 {
@@ -38,12 +41,15 @@ class SkeluarPengantar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idpengirim', 'iduser'], 'integer'],
+            [['idpengirim','idtemplate', 'iduser'], 'integer'],
             [['tanggal', 'create_at', 'update_at'], 'safe'],
-            [['kepada', 'isi', 'status'], 'string'],
+            [['isi', 'status'], 'string'],
+            [['di'], 'string', 'max' => 50],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
             [['tempat'], 'string', 'max' => 200],
+            [['kepada'], 'string', 'max' => 500],
             [['idpengirim'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpengirim' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -56,10 +62,12 @@ class SkeluarPengantar extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nomor' => 'Nomor',
             'idpengirim' => 'Pengirim',
-            'tempat' => 'Tempat',
+            'tempat' => 'Tempat Surat Dikeluarkan',
             'tanggal' => 'Tanggal',
             'kepada' => 'Kepada',
+            'di' => 'Di',
             'isi' => 'Isi Surat Pengantar',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -76,6 +84,16 @@ class SkeluarPengantar extends \yii\db\ActiveRecord
     public function getIdpengirim0()
     {
         return $this->hasOne(Pegawai::className(), ['id' => 'idpengirim']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function beforeSave($insert)

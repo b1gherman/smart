@@ -260,7 +260,7 @@ class SkeluarSuratdinasController extends Controller
         $templateProcessor->setValue('namajabatan', $model->idttd0->namajabatan);
         $templateProcessor->setValue('namalengkap', $modelpegawai->namapegawai);
 
-        $filename = "naskah_suratdinas_$model->id.docx";
+        $filename = "naskahkeluar_suratdinas_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
         sleep(5);
         $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;

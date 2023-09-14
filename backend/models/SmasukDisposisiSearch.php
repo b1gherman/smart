@@ -17,7 +17,7 @@ class SmasukDisposisiSearch extends SmasukDisposisi
     public function rules()
     {
         return [
-            [['id', 'iduser'], 'integer'],
+            [['id','idtemplate', 'iduser'], 'integer'],
             [['nomor_agenda', 'tanggal_terima', 'nomor', 'tanggal', 'asal_surat', 'hal', 'idditeruskan', 'idketdisposisi', 'idpildisposisi', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class SmasukDisposisiSearch extends SmasukDisposisi
         $query->andFilterWhere([
             'id' => $this->id,
             'tanggal_terima' => $this->tanggal_terima,
+            'idtemplate' => $this->idtemplate,
             'tanggal' => $this->tanggal,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,

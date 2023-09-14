@@ -36,19 +36,20 @@ use yii\widgets\ActiveForm;
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 500,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) 
+    ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
@@ -66,10 +67,13 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
+
     <?php
     if ($role == 'admin') { ?>
         <?= $form->field($model, 'status')->dropDownList(['DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI',]) ?>
-        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) ?>
+        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) 
+        ?>
 
         <div class="row">
             <?php

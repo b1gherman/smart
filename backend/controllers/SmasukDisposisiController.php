@@ -240,4 +240,36 @@ class SmasukDisposisiController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
+
+    public function actionToword($id) {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+        // $template = "memo.docx";
+        $template = $model->idtemplate0->file;
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+// Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+// Simple table
+        $templateProcessor->setValue('nomoragenda', $model->nomor_agenda);
+        $templateProcessor->setValue('tanggalagenda', $model->tanggal_terima);
+        $templateProcessor->setValue('nomorsuratmasuk', $model->nomor);
+        $templateProcessor->setValue('tanggalsuratmasuk', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('asalsurat', $model->asal_surat);
+        $templateProcessor->setValue('hal', $model->hal);
+
+        $filename = "naskahmasuk_disposisi_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        sleep(5);
+        $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
+        if (file_exists($path)) {
+            \Yii::$app->response->sendFile($path);
+            //return $this->redirect(['index']);
+        }
+        //\Yii::$app->session->setFlash("info", "File Tidak ada");
+        //return $this->redirect(['index']);
+        //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
+    }
 }

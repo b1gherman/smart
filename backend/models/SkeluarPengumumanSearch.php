@@ -17,7 +17,7 @@ class SkeluarPengumumanSearch extends SkeluarPengumuman
     public function rules()
     {
         return [
-            [['id', 'idpembuat', 'iduser'], 'integer'],
+            [['id', 'idpembuat', 'idtemplate', 'iduser'], 'integer'],
             [['nomor', 'tentang', 'isi', 'tempat', 'tanggal', 'status', 'file_upload', 'create_at', 'update_at'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class SkeluarPengumumanSearch extends SkeluarPengumuman
         $query->andFilterWhere([
             'id' => $this->id,
             'idpembuat' => $this->idpembuat,
+            'idtemplate' => $this->idtemplate,
             'tanggal' => $this->tanggal,
             'create_at' => $this->create_at,
             'update_at' => $this->update_at,

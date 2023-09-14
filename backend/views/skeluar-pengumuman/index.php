@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Pembuat',
                 'attribute' => 'idpembuat0.namapegawai'
             ],
-            'tentang:ntext',
+            // 'tentang:ntext',
             // 'isi:ntext',
             //'tempat',
             //'tanggal',
@@ -47,18 +47,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {report}',
+                // 'template' => '{view} {update} {delete} {report}',
+                'template' => '{view} {update} {delete} {toword}',
                 'buttons' => [
-                    'report' => function ($url, $model) {
-                        return Html::a('<span class="fa fa-print"></span>', '', [
-                                    'title' => Yii::t('app', 'Print'),
-                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
-                                        '/skeluar-pengumuman/report',
-                                        'id' => $model->id
-                                    ]) . "'); return false",
-                                        // 'class' => 'btn btn-outline-success btn-xs'
+                    'toword' => function ($url, $model) {
+                        return Html::a('<span class="fas fa-file-word"></span>', $url, [
+                                    'title' => Yii::t('app', 'Word'),
+                                    'class' => 'btn btn-outline-info btn-xs',
                         ]);
                     },
+                    // 'report' => function ($url, $model) {
+                    //     return Html::a('<span class="fa fa-print"></span>', '', [
+                    //                 'title' => Yii::t('app', 'Print'),
+                    //                 'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                    //                     '/skeluar-pengumuman/report',
+                    //                     'id' => $model->id
+                    //                 ]) . "'); return false",
+                    //                     // 'class' => 'btn btn-outline-success btn-xs'
+                    //     ]);
+                    // },
                 ]
             ],
         ],

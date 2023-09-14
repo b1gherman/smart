@@ -42,13 +42,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idpenerima0.namapegawai'
             ],
             // 'isi:ntext',
-            [
-                'label' => 'Isi Keterangan',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Keterangan',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             'tempat',
             'tanggal',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',

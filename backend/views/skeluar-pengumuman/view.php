@@ -37,19 +37,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idpembuat0.namapegawai'
             ],
             // 'tentang:ntext',
-            [
-                'label' => 'Tentang',
-                'attribute' => 'tentang',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Tentang',
+            //     'attribute' => 'tentang',
+            //     'format' => 'html',
+            // ],
             // 'isi:ntext',
-            [
-                'label' => 'Isi Pengumuman',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Pengumuman',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             'tempat',
             'tanggal',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',

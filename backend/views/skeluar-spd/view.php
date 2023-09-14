@@ -42,22 +42,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idppd0.namapegawai'
             ],
             'tingkat_biaya',
-            'maksud',
+            // 'maksud',
             'alat_angkut',
-            'tempat_berangkat',
-            'tujuan',
-            'lama',
-            'tgl_berangkat',
-            'tgl_kembali',
-            // 'idanggaran_instansi',
             [
-                'label' => 'Instansi',
-                'attribute' => 'idanggaranInstansi.namainstansi'
+                'label' => 'Surat Tugas Nomor',
+                'attribute' => 'idsurattugas0.nomor'
             ],
-            'anggaran_akun',
-            'keterangan_lain',
+            // 'tempat_berangkat',
+            // 'tujuan',
+            // 'lama',
+            // 'tgl_berangkat',
+            // 'tgl_kembali',
+            // 'idanggaran_instansi',
+            // [
+            //     'label' => 'Instansi',
+            //     'attribute' => 'idanggaranInstansi.namainstansi'
+            // ],
+            // 'anggaran_akun',
+            // 'keterangan_lain',
             'tempat',
             'tanggal',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'status',
             'file_upload',
             'create_at',

@@ -260,7 +260,7 @@ class SkeluarUndanganeksternalController extends Controller
         $templateProcessor->setValue('Nama Jabatan', $model->idttd0->namajabatan);
         $templateProcessor->setValue('Nama Lengkap', $modelpegawai->namapegawai);
 
-        $filename = "naskah_undanganeksternal_$model->id.docx";
+        $filename = "naskahkeluar_undanganeksternal_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
         sleep(5);
         $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;

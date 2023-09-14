@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'tanggal',
             'asal_surat',
             'hal:ntext',
-            'idditeruskan',
+            // 'idditeruskan',
             // [
             //     'label' => 'Diteruskan',
             //     'attribute' => 'idditeruskans',
@@ -50,9 +50,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //     },
             //     'format' => 'html',
             // ],
-            'idketdisposisi',
-            'idpildisposisi',
-            'catatan:ntext',
+            // 'idketdisposisi',
+            // 'idpildisposisi',
+            // 'catatan:ntext',
+            [
+                'label' => 'Template',
+                'attribute' => 'idtemplate0.nama'
+            ],
             'file_upload',
             'create_at',
             'update_at',

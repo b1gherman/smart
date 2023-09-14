@@ -15,13 +15,14 @@ use yii\widgets\ActiveForm;
     <?php
     $role = Yii::$app->sikerma->getRole(Yii::$app->user->id);
     // print_r($role);
-    if ($role == 'admin') {?>
+    if ($role == 'admin') { ?>
         <?= $form->field($model, 'nomor')->textInput(['maxlength' => true]) ?>
-    <?php 
-    }else{ 
+    <?php
+    } else {
     ?>
-        <?php //= $form->field($model, 'nomor')->textInput(['maxlength' => true]) ?>
-    <?php 
+        <?php //= $form->field($model, 'nomor')->textInput(['maxlength' => true]) 
+        ?>
+    <?php
     };
     ?>
 
@@ -29,30 +30,32 @@ use yii\widgets\ActiveForm;
     ?>
     <?= $form->field($model, 'idpembuat')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai')) ?>
 
-    <?= $form->field($model, 'tentang')->textarea(['rows' => 6]) ?>
+    <?php //= $form->field($model, 'tentang')->textarea(['rows' => 6]) 
+    ?>
 
     <?php //= $form->field($model, 'isi')->textarea(['rows' => 6]) 
     ?>
-    <?= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                // 'anchor', 'charmap', 'code', 'help', 'hr',
-                // 'image', 'link', 'lists', 'media', 'paste',
-                // 'searchreplace', 'table',
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste', 'nonbreaking',
-                'searchreplace', 'table', 'template', 'preview', 'save', 'lineheight'
+    <?php //= $form->field($model, 'isi')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             // 'anchor', 'charmap', 'code', 'help', 'hr',
+    //             // 'image', 'link', 'lists', 'media', 'paste',
+    //             // 'searchreplace', 'table',
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste', 'nonbreaking',
+    //             'searchreplace', 'table', 'template', 'preview', 'save', 'lineheight'
 
-            ],
-            // 'toolbar' => '| lineheightselect | undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | indent outdent',
-            // 'lineheight_formats' => "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt",
-            // 'template_cdate_classes' => 'cdate creationdate',
-            'height' => 500,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    //         ],
+    //         // 'toolbar' => '| lineheightselect | undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | indent outdent',
+    //         // 'lineheight_formats' => "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt",
+    //         // 'template_cdate_classes' => 'cdate creationdate',
+    //         'height' => 500,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) 
+    ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
@@ -70,10 +73,13 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
+
     <?php
     if ($role == 'admin') { ?>
         <?= $form->field($model, 'status')->dropDownList(['DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI',]) ?>
-        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) ?>
+        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) 
+        ?>
 
         <div class="row">
             <?php

@@ -14,6 +14,7 @@ use Yii;
  * @property string|null $tingkat_biaya
  * @property string|null $maksud
  * @property string|null $alat_angkut
+ * @property int|null $idsurattugas
  * @property string|null $tempat_berangkat
  * @property string|null $tujuan
  * @property int|null $lama
@@ -24,6 +25,7 @@ use Yii;
  * @property string|null $keterangan_lain
  * @property string|null $tempat
  * @property string|null $tanggal
+ * @property int|null $idtemplate
  * @property string|null $status
  * @property string|null $file_upload
  * @property string $create_at
@@ -33,6 +35,8 @@ use Yii;
  * @property Instansi $idanggaranInstansi
  * @property Pegawai $idppd0
  * @property Pegawai $idppk0
+ * @property SkeluarTugas $idskeluartugas0
+ * @property Template $idtemplate0
  */
 class SkeluarSpd extends \yii\db\ActiveRecord
 {
@@ -50,16 +54,18 @@ class SkeluarSpd extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idppk', 'idppd', 'lama', 'idanggaran_instansi', 'iduser'], 'integer'],
+            [['idppk', 'idppd','idsurattugas','idtemplate', 'lama', 'idanggaran_instansi', 'iduser'], 'integer'],
             [['tgl_berangkat', 'tgl_kembali', 'tanggal', 'create_at', 'update_at'], 'safe'],
-            [['status'], 'string'],
-            [['nomor', 'alat_angkut', 'anggaran_akun', 'file_upload'], 'string', 'max' => 100],
+            [['alat_angkut','status'], 'string'],
+            [['nomor', 'anggaran_akun', 'file_upload'], 'string', 'max' => 100],
             [['tingkat_biaya'], 'string', 'max' => 1],
             [['maksud', 'keterangan_lain'], 'string', 'max' => 500],
             [['tempat_berangkat', 'tujuan', 'tempat'], 'string', 'max' => 200],
             [['idanggaran_instansi'], 'exist', 'skipOnError' => true, 'targetClass' => Instansi::className(), 'targetAttribute' => ['idanggaran_instansi' => 'id']],
             [['idppd'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idppd' => 'id']],
             [['idppk'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idppk' => 'id']],
+            [['idsurattugas'], 'exist', 'skipOnError' => true, 'targetClass' => SkeluarTugas::className(), 'targetAttribute' => ['idsurattugas' => 'id']],
+            [['idtemplate'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['idtemplate' => 'id']],
         ];
     }
 
@@ -76,6 +82,7 @@ class SkeluarSpd extends \yii\db\ActiveRecord
             'tingkat_biaya' => 'Tingkat Biaya Perjalanan Dinas',
             'maksud' => 'Maksud Perjalanan Dinas',
             'alat_angkut' => 'Alat angkut yang dipergunakan',
+            'idsurattugas' => 'Surat Tugas Nomor',
             'tempat_berangkat' => 'Tempat Berangkat',
             'tujuan' => 'Tempat Tujuan',
             'lama' => 'Lama Perjalanan Dinas',
@@ -86,6 +93,7 @@ class SkeluarSpd extends \yii\db\ActiveRecord
             'keterangan_lain' => 'Keterangan Lain-Lain',
             'tempat' => 'Dikeluarkan di',
             'tanggal' => 'Tanggal',
+            'idtemplate' => 'Template',
             'status' => 'Status',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
@@ -123,6 +131,27 @@ class SkeluarSpd extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Pegawai::className(), ['id' => 'idppk']);
     }
+
+    /**
+     * Gets query for [[Idsurattugas0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdsurattugas0()
+    {
+        return $this->hasOne(SkeluarTugas::className(), ['id' => 'idsurattugas']);
+    }
+
+    /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
+    }
+
 
     public function beforeSave($insert)
     {

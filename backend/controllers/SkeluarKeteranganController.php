@@ -300,7 +300,7 @@ class SkeluarKeteranganController extends Controller
         $templateProcessor->setValue('nama jabatan', $modeljabatanpemberi->namajabatan);
         $templateProcessor->setValue('nama lengkap', $modelpemberi->namapegawai);
 
-        $filename = "naskah_keterangan_$model->id.docx";
+        $filename = "naskahkeluar_keterangan_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
         sleep(5);
         $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;

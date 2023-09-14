@@ -41,11 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'idpenerima0.namapegawai'
             ],
             // 'isi:ntext',
-            [
-                'label' => 'Isi Surat Kuasa',
-                'attribute' => 'isi',
-                'format' => 'html',
-            ],
+            // [
+            //     'label' => 'Isi Surat Kuasa',
+            //     'attribute' => 'isi',
+            //     'format' => 'html',
+            // ],
             //'tempat',
             //'tanggal',
             'status',
@@ -56,18 +56,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {report}',
+                // 'template' => '{view} {update} {delete} {report}',
+                'template' => '{view} {update} {delete} {toword}',
                 'buttons' => [
-                    'report' => function ($url, $model) {
-                        return Html::a('<span class="fa fa-print"></span>', '', [
-                                    'title' => Yii::t('app', 'Print'),
-                                    'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
-                                        '/skeluar-kuasa/report',
-                                        'id' => $model->id
-                                    ]) . "'); return false",
-                                        // 'class' => 'btn btn-outline-success btn-xs'
+                    'toword' => function ($url, $model) {
+                        return Html::a('<span class="fas fa-file-word"></span>', $url, [
+                                    'title' => Yii::t('app', 'Word'),
+                                    'class' => 'btn btn-outline-info btn-xs',
                         ]);
                     },
+                    // 'report' => function ($url, $model) {
+                    //     return Html::a('<span class="fa fa-print"></span>', '', [
+                    //                 'title' => Yii::t('app', 'Print'),
+                    //                 'onclick' => "window.open ('" . \yii\helpers\Url::toRoute([
+                    //                     '/skeluar-kuasa/report',
+                    //                     'id' => $model->id
+                    //                 ]) . "'); return false",
+                    //                     // 'class' => 'btn btn-outline-success btn-xs'
+                    //     ]);
+                    // },
                 ]
             ],
         ],

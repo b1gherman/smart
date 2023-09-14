@@ -248,7 +248,7 @@ class SkeluarmemoController extends Controller {
         $templateProcessor->setValue('nama jabatan', $model->idttd0->namajabatan);
         $templateProcessor->setValue('nama lengkap', $modelpegawai->namapegawai);
 
-        $filename = "naskah_memo_$model->id.docx";
+        $filename = "naskahkeluar_memo_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
         sleep(5);
         $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;

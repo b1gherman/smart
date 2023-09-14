@@ -232,4 +232,46 @@ class SkeluarPengantarController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
+
+    public function actionToword($id)
+    {
+        //return \Yii::$app->basePath;
+        $model = $this->findModel($id);
+
+        //pengirim
+        $modeljabpengirim = \backend\models\Jabatanpegawai::findOne(['idpegawai' => $model->idpengirim, 'status' => 1]);
+        $modeljabatanpengirim = \backend\models\Jabatan::findOne(['id' => $modeljabpengirim->idjabatan]);
+
+        // $template = "memo.docx";
+        $template = $model->idtemplate0->file;
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
+
+        // Variables on different parts of document
+        //$templateProcessor->setValue('weekday', date('l')); // On section/content
+        //$templateProcessor->setValue('time', date('H:i')); // On footer
+        //$templateProcessor->setValue('serverName', realpath(__DIR__)); // On header
+        // Simple table
+
+        
+        
+        $templateProcessor->setValue('tempat', $model->tempat);
+        $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('kepada', $model->kepada);
+        $templateProcessor->setValue('di', $model->di);
+        $templateProcessor->setValue('nomor', $model->nomor);
+        $templateProcessor->setValue('namajabatan', $modeljabatanpengirim->namajabatan);
+        $templateProcessor->setValue('namalengkap', $model->idpengirim0->namapegawai);
+
+        $filename = "naskahkeluar_pengantar_$model->id.docx";
+        $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
+        sleep(5);
+        $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
+        if (file_exists($path)) {
+            \Yii::$app->response->sendFile($path);
+            //return $this->redirect(['index']);
+        }
+        //\Yii::$app->session->setFlash("info", "File Tidak ada");
+        //return $this->redirect(['index']);
+        //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
+    }
 }

@@ -13,13 +13,12 @@ use kartik\mpdf\Pdf;
 /**
  * SkeluarTugasController implements the CRUD actions for SkeluarTugas model.
  */
-class SkeluarTugasController extends Controller
-{
+class SkeluarTugasController extends Controller {
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -34,14 +33,13 @@ class SkeluarTugasController extends Controller
      * Lists all SkeluarTugas models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new SkeluarTugasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -51,10 +49,9 @@ class SkeluarTugasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -63,8 +60,7 @@ class SkeluarTugasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new SkeluarTugas();
 
         if ($this->request->isPost) {
@@ -91,7 +87,7 @@ class SkeluarTugasController extends Controller
         // }
 
         return $this->render('create', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -102,8 +98,7 @@ class SkeluarTugasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
         $model->idpenerima = json_decode($model->idpenerima);
 
@@ -129,7 +124,7 @@ class SkeluarTugasController extends Controller
         // }
 
         return $this->render('update', [
-            'model' => $model,
+                    'model' => $model,
         ]);
     }
 
@@ -140,8 +135,7 @@ class SkeluarTugasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -154,8 +148,7 @@ class SkeluarTugasController extends Controller
      * @return SkeluarTugas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = SkeluarTugas::findOne($id)) !== null) {
             return $model;
         }
@@ -163,22 +156,20 @@ class SkeluarTugasController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionPenerima($id)
-    {
+    public function actionPenerima($id) {
         $this->redirect(['skeluar-penerimatugas/create', 'id' => $id]);
     }
 
-    public function actionDeleteUpload()
-    {
+    public function actionDeleteUpload() {
 
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $keys = Yii::$app->request->post('key');
         $key = explode(' ', $keys);
 
         $model = SkeluarTugas::find()->where([
-            'id' => $key[1],
-            //'create_id' => Yii::$app->user->id
-        ])->one();
+                    'id' => $key[1],
+                        //'create_id' => Yii::$app->user->id
+                ])->one();
 
         if ($key[0] == 'file_upload') {
             @unlink(Yii::getAlias('@backend') . '/web/naskahkeluar/' . $model->file_upload);
@@ -189,8 +180,7 @@ class SkeluarTugasController extends Controller
         return [];
     }
 
-    public function actionReport($id)
-    {
+    public function actionReport($id) {
         // get your HTML raw content without any layouts or scripts
 
         $model = $this->findModel($id);
@@ -223,9 +213,9 @@ class SkeluarTugasController extends Controller
             // 'modelgolonganpenerima'=>$modelgolonganpenerima,
             // 'modeljabatanpenerima'=>$modeljabatanpenerima,
             'modelinstansi' => $modelinstansi,
-            // 'ttd1'=>$ttd1
-            // 'modelgolpeg' => $modelgolpeg,
-            // 'modelgolongan' => $modelgolongan
+                // 'ttd1'=>$ttd1
+                // 'modelgolpeg' => $modelgolpeg,
+                // 'modelgolongan' => $modelgolongan
         ]);
 
         // setup kartik\mpdf\Pdf component
@@ -249,8 +239,8 @@ class SkeluarTugasController extends Controller
             'options' => ['title' => 'Krajee Report Title'],
             // call mPDF methods on the fly
             'methods' => [
-                //'SetHeader' => ['Barang Keluar'],
-                //'SetFooter' => ['{PAGENO}'],
+            //'SetHeader' => ['Barang Keluar'],
+            //'SetFooter' => ['{PAGENO}'],
             ],
             'marginTop' => 0,
             'marginLeft' => 0,
@@ -261,8 +251,7 @@ class SkeluarTugasController extends Controller
         return $pdf->render();
     }
 
-    public function actionToword($id)
-    {
+    public function actionToword($id) {
         //return \Yii::$app->basePath;
         $model = $this->findModel($id);
         $modelpemberi = \backend\models\Pegawai::findOne(['id' => $model->idpemberi, 'aktif' => 1]);
@@ -274,7 +263,18 @@ class SkeluarTugasController extends Controller
         // $modeljabpeg = \backend\models\Jabatanpegawai::findOne(['idjabatan' => $model->idpemberi, 'status' => 1]);
         // $modelpegawai = \backend\models\Pegawai::findOne(['id' => $modeljabpeg->idpegawai, 'aktif' => 1]);
         // $template = "memo.docx";
+        if (!isset($model->idtemplate0->file)) {
+            \Yii::$app->session->setFlash("info", "File Template belum di set");
+            return $this->redirect(['index']);
+        }
         $template = $model->idtemplate0->file;
+
+        $penerima = json_decode($model->idpenerima);
+        if (!empty($penerima)) {
+            $penerima1 = \backend\models\Pegawai::findOne($penerima[0]);
+            $penerima2 = \backend\models\Pegawai::findOne($penerima[1]);
+        }
+
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(\Yii::$app->basePath . '/web/template/' . $template);
 
         // Variables on different parts of document
@@ -290,19 +290,31 @@ class SkeluarTugasController extends Controller
         $templateProcessor->setValue('jabatan pemberi', $modeljabatanpemberi->namajabatan);
         $templateProcessor->setValue('unit organisasi', $modelinstansi->namainstansi);
 
+        $templateProcessor->setValue('nama penerima1', $penerima1->namapegawai);
+        $templateProcessor->setValue('nip penerima1', $penerima1->nip);
+        $templateProcessor->setValue('pangkat penerima1', $penerima1->pangkat);
+        $templateProcessor->setValue('golongan penerima1', $penerima1->golongan);
+        $templateProcessor->setValue('jabatan penerima1', $penerima1->jabatan);
+
+        $templateProcessor->setValue('nama penerima2', $penerima2->namapegawai);
+        $templateProcessor->setValue('nip penerima2', $penerima2->nip);
+        $templateProcessor->setValue('pangkat penerima2', $penerima2->pangkat);
+        $templateProcessor->setValue('golongan penerima2', $penerima2->golongan);
+        $templateProcessor->setValue('jabatan penerima2', $penerima2->jabatan);
+
         $templateProcessor->setValue('tugas', $model->tugas);
         $templateProcessor->setValue('selama', $model->selama);
         $templateProcessor->setValue('lokasi', $model->lokasi);
         $templateProcessor->setValue('tanggal berangkat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
         $templateProcessor->setValue('sumber dana', $model->sumber_dana);
-        
+
         $templateProcessor->setValue('tempat', $model->tempat);
         $templateProcessor->setValue('tanggal surat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
-        
+
         $templateProcessor->setValue('nama jabatan', $modeljabatanpemberi->namajabatan);
         $templateProcessor->setValue('nama lengkap', $modelpemberi->namapegawai);
 
-        $filename = "naskah_tugas_$model->id.docx";
+        $filename = "naskahkeluar_tugas_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
         sleep(5);
         $path = Yii::getAlias('@webroot') . '/hasil/' . $filename;
@@ -314,4 +326,5 @@ class SkeluarTugasController extends Controller
         //return $this->redirect(['index']);
         //return \Yii::$app->response->sendFile(\Yii::$app->basePath . '/web/hasil/' . $filename);
     }
+
 }

@@ -26,72 +26,46 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
-            [
-                'class' => 'kartik\grid\ExpandRowColumn',
-                'value' => function ($model, $key, $index, $column) {
-                    return kartik\grid\GridView::ROW_COLLAPSED;
-                },
-                'headerOptions' => ['class' => 'kartik-sheet-style'],
-                'expandOneOnly' => true,
-                'detail' => function ($model, $key, $index, $column) {
-                    $searchModel = new backend\models\GolonganpegawaiSearch();
-                    $searchModel->idpegawai = $model['id'];
-                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-                    //
-                    // $searchModelPendidikan = new backend\models\RiwayatpendidikanSearch();
-                    // $searchModelPendidikan->idpegawai = $model['id'];
-                    // $dataProviderPendidikan = $searchModelPendidikan->search(Yii::$app->request->queryParams);
-                    //
-                    // $searchModelDiklat = new backend\models\DiklatSearch();
-                    // $searchModelDiklat->idpegawai = $model['id'];
-                    // $dataProviderDiklat = $searchModelDiklat->search(Yii::$app->request->queryParams);
-                    //
-                    $searchModelJabatan = new backend\models\JabatanpegawaiSearch();
-                    $searchModelJabatan->idpegawai = $model['id'];
-                    $dataProviderJabatan = $searchModelJabatan->search(Yii::$app->request->queryParams);
-                    //
-                    // $searchModelPasangan = new backend\models\PasanganSearch();
-                    // $searchModelPasangan->idpegawai = $model['id'];
-                    // $dataProviderPasangan = $searchModelPasangan->search(Yii::$app->request->queryParams);
-                    //
-                    // $searchModelAnak = new backend\models\AnakpegawaiSearch();
-                    // $searchModelAnak->id_pegawai = $model['id'];
-                    // $dataProviderAnak = $searchModelAnak->search(Yii::$app->request->queryParams);
-                    //
-                    // $searchModelRiwayatKerja = new backend\models\RiwayatkerjaSearch();
-                    // $searchModelRiwayatKerja->idpegawai = $model['id'];
-                    // $dataProviderRiwayatKerja = $searchModelRiwayatKerja->search(Yii::$app->request->queryParams);
-                    
-                    return Yii::$app->controller->renderPartial('pegawai_items', [
-                                'searchModel' => $searchModel,
-                                'dataProvider' => $dataProvider,
-                                // 'dataProviderPendidikan' => $dataProviderPendidikan,
-                                // 'dataProviderDiklat' => $dataProviderDiklat,
-                                'dataProviderJabatan' => $dataProviderJabatan
-                                // 'dataProviderPasangan' => $dataProviderPasangan,
-                                // 'dataProviderAnak' => $dataProviderAnak,
-                                // 'dataProviderRiwayatKerja' => $dataProviderRiwayatKerja
-                    ]);
-                },
-            ],
+//            [
+//                'class' => 'kartik\grid\ExpandRowColumn',
+//                'value' => function ($model, $key, $index, $column) {
+//                    return kartik\grid\GridView::ROW_COLLAPSED;
+//                },
+//                'headerOptions' => ['class' => 'kartik-sheet-style'],
+//                'expandOneOnly' => true,
+//                'detail' => function ($model, $key, $index, $column) {
+//                    $searchModel = new backend\models\GolonganpegawaiSearch();
+//                    $searchModel->idpegawai = $model['id'];
+//                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//                    $searchModelJabatan = new backend\models\JabatanpegawaiSearch();
+//                    $searchModelJabatan->idpegawai = $model['id'];
+//                    $dataProviderJabatan = $searchModelJabatan->search(Yii::$app->request->queryParams);
+//                    return Yii::$app->controller->renderPartial('pegawai_items', [
+//                                'searchModel' => $searchModel,
+//                                'dataProvider' => $dataProvider,
+//                                'dataProviderJabatan' => $dataProviderJabatan
+//                    ]);
+//                },
+//            ],
             //'id',
             'nip',
             'namapegawai',
-            'jeniskelamin',
-            // 'statuskepegawaian',
+            'golongan',
+            'pangkat',
+            'jabatan',
 //            [
 //                'format' => 'image',
 //                'value' => function($data) {
 //                    return $data->imageurl;
 //                },
 //            ],
-            // [
-            //     'attribute' => 'Foto',
-            //     'format' => 'html',
-            //     'value' => function($data) {
-            //         return Html::img($data->imageurl, ['width' => '100']);
-            //     },
-            // ],
+//            [
+//                'attribute' => 'Foto',
+//                'format' => 'html',
+//                'value' => function($data) {
+//                    return Html::img($data->imageurl, ['width' => '100']);
+//                },
+//            ],
             //'no_serikarpeg',
             //'npwp',
             //'tempatlahir',

@@ -26,7 +26,8 @@ use yii\widgets\ActiveForm;
     };
     ?>
 
-    <?php //= $form->field($model, 'namasurat')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'namasurat')->textInput(['maxlength' => true]) 
+    ?>
 
     <label class="col-form-label">Yang bertandatangan di bawah ini :</label>
     <?php //= $form->field($model, 'idpemberi')->textInput()->label(false) 
@@ -34,7 +35,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'idpemberi')->dropDownList(yii\helpers\ArrayHelper::map(\backend\models\Pegawai::find()->all(), 'id', 'namapegawai'))->label(false) ?>
 
     <!-- <label class="col-form-label">dengan ini menerangkan bahwa :</label> -->
-    <?php //= $form->field($model, 'hal')->textarea(['rows' => 6])->label(false) ?>
+    <?php //= $form->field($model, 'hal')->textarea(['rows' => 6])->label(false) 
+    ?>
 
     <?php //= $form->field($model, 'idpenerima')->textInput() 
     ?>
@@ -54,7 +56,8 @@ use yii\widgets\ActiveForm;
     //         'element_format' => 'html',
     //         // ...
     //     ],
-    // ]) ?>
+    // ]) 
+    ?>
 
     <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
 
@@ -72,12 +75,13 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
-<?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
+    <?= $form->field($model, 'idtemplate')->dropDownList(yii\helpers\ArrayHelper::map(backend\models\Template::find()->all(), 'id', 'nama')) ?>
 
     <?php
     if ($role == 'admin') { ?>
         <?= $form->field($model, 'status')->dropDownList(['DRAFT' => 'DRAFT', 'DISETUJUI' => 'DISETUJUI',]) ?>
-        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) ?>
+        <?php //= $form->field($model, 'file_upload')->textInput(['maxlength' => true]) 
+        ?>
 
         <div class="row">
             <?php

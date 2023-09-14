@@ -19,10 +19,13 @@ use Yii;
  * @property string|null $idketdisposisi
  * @property string|null $idpildisposisi
  * @property string|null $catatan
+ * @property int|null $idtemplate
  * @property string|null $file_upload
  * @property string $create_at
  * @property string $update_at
  * @property int|null $iduser
+ * 
+ * @property Template $idtemplate0
  */
 class SmasukDisposisi extends \yii\db\ActiveRecord
 {
@@ -42,7 +45,7 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
         return [
             [['tanggal_terima', 'tanggal', 'create_at', 'update_at', 'idditeruskan', 'idketdisposisi', 'idpildisposisi'], 'safe'],
             [['hal', 'catatan'], 'string'],
-            [['iduser'], 'integer'],
+            [['idtemplate', 'iduser'], 'integer'],
             [['nomor_agenda', 'nomor', 'file_upload'], 'string', 'max' => 100],
             [['asal_surat'], 'string', 'max' => 200],
         ];
@@ -57,7 +60,7 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nomor_agenda' => 'Nomor Agenda',
             'tanggal_terima' => 'Tanggal Terima',
-            'nomor' => 'Nomor',
+            'nomor' => 'Nomor Surat',
             'tanggal' => 'Tanggal Surat',
             'asal_surat' => 'Asal Surat',
             'hal' => 'Hal',
@@ -65,11 +68,22 @@ class SmasukDisposisi extends \yii\db\ActiveRecord
             'idketdisposisi' => 'Idketdisposisi',
             'idpildisposisi' => 'Idpildisposisi',
             'catatan' => 'Catatan Khusus',
+            'idtemplate' => 'Template',
             'file_upload' => 'File Upload',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
             'iduser' => 'Iduser',
         ];
+    }
+
+     /**
+     * Gets query for [[Idtemplate0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdtemplate0()
+    {
+        return $this->hasOne(Template::className(), ['id' => 'idtemplate']);
     }
 
     public function getDiteruskan()
