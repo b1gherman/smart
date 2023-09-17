@@ -65,13 +65,37 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lokasi')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tanggal_tugas')->textInput(['maxlength' => true]) ?>
+    <?php //= $form->field($model, 'tanggal_berangkat')->textInput(['maxlength' => true]) ?>
+    <?=
+    $form->field($model, 'tanggal_berangkat')->widget(kartik\date\DatePicker::className(), [
+        'options' => ['placeholder' => 'Pilih Tanggal'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'starView' => 0,
+            'todayHighlight' => true
+        ]
+    ])
+    ?>
+
+<?=
+    $form->field($model, 'tanggal_haruskembali')->widget(kartik\date\DatePicker::className(), [
+        'options' => ['placeholder' => 'Pilih Tanggal'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd',
+            'starView' => 0,
+            'todayHighlight' => true
+        ]
+    ])
+    ?>
+
 
     <?= $form->field($model, 'sumber_dana')->textInput(['maxlength' => true]) ?>
 
     <?php //= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'tempat')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'tempat')->textInput(['maxlength' => true, 'value' => 'Padang Panjang']) ?>
 
     <?php //= $form->field($model, 'tanggal')->textInput() 
     ?>

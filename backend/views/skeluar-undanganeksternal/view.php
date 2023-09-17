@@ -36,12 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'hal',
             'tempat',
             'tanggal',
-            // 'kepada:ntext',
-            [
-                'label' => 'Kepada',
-                'attribute' => 'kepada',
-                'format' => 'html',
-            ],
+            'kepada:ntext',
+            // [
+            //     'label' => 'Kepada',
+            //     'attribute' => 'kepada',
+            //     'format' => 'html',
+            // ],
             'di',
             // 'isi:ntext',
             // [

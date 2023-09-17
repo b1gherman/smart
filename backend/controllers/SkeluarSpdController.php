@@ -280,7 +280,8 @@ class SkeluarSpdController extends Controller
         $templateProcessor->setValue('alatangkut', $model->alat_angkut);
         $templateProcessor->setValue('tujuan', $modelsurattugas->lokasi);
         $templateProcessor->setValue('lama', $modelsurattugas->selama);
-        $templateProcessor->setValue('tanggalberangkat', $modelsurattugas->tanggal_tugas);
+        $templateProcessor->setValue('tanggalberangkat', Yii::$app->formatter->asDate($modelsurattugas->tanggal_berangkat, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('tanggalharuskembali', Yii::$app->formatter->asDate($modelsurattugas->tanggal_haruskembali, 'dd MMMM yyyy'));
         $templateProcessor->setValue('nomorsurattugas', $modelsurattugas->nomor);
         
         $filename = "naskahkeluar_spd_$model->id.docx";

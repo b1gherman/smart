@@ -12,7 +12,8 @@ use Yii;
  * @property int|null $idpemberi
  * @property string|null $idpenerima
  * @property string|null $tugas
- * @property string|null $tanggal_tugas
+ * @property string|null $tanggal_berangkat
+ * @property string|null $tanggal_haruskembali
  * @property string|null $selama
  * @property string|null $lokasi
  * @property string|null $sumber_dana
@@ -47,9 +48,9 @@ class SkeluarTugas extends \yii\db\ActiveRecord
         return [
             [['idpemberi', 'iduser'], 'integer'],
             [['tugas', 'keterangan', 'status'], 'string'],
-            [['idpenerima','tanggal', 'create_at', 'update_at'], 'safe'],
+            [['idpenerima','tanggal_berangkat','tanggal_haruskembali','tanggal', 'create_at', 'update_at'], 'safe'],
             [['nomor', 'file_upload'], 'string', 'max' => 100],
-            [['tanggal_tugas', 'selama'], 'string', 'max' => 50],
+            [['selama'], 'string', 'max' => 50],
             [['lokasi'], 'string', 'max' => 500],
             [['tempat','sumber_dana'], 'string', 'max' => 200],
             [['idpemberi'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['idpemberi' => 'id']],
@@ -68,7 +69,8 @@ class SkeluarTugas extends \yii\db\ActiveRecord
             'idpemberi' => 'Pemberi Tugas',
             'idpenerima' => 'Penerima Tugas',
             'tugas' => 'Tugas',
-            'tanggal_tugas' => 'Tanggal Berangkat',
+            'tanggal_berangkat' => 'Tanggal Berangkat',
+            'tanggal_haruskembali' => 'Tanggal Harus Kembali',
             'selama' => 'Selama',
             'lokasi' => 'Lokasi',
             'sumber_dana' => 'Sumber Dana',

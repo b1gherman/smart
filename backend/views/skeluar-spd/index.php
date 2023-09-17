@@ -143,6 +143,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Pelaksana Perjalanan Dinas',
                 'attribute' => 'idppd0.namapegawai'
             ],
+            // 'idsurattugas0.nomor',
+            [
+                'label' => 'Nomor Surat Tugas',
+                'attribute' => 'idsurattugas0.nomor'
+            ],
             // 'tingkat_biaya',
             // 'maksud',
             // 'alat_angkut',

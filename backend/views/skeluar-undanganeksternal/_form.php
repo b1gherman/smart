@@ -48,21 +48,20 @@ use yii\widgets\ActiveForm;
     ])
     ?>
 
-    <?php //= $form->field($model, 'kepada')->textarea(['rows' => 6]) 
-    ?>
-    <?= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
-        'clientOptions' => [
-            'plugins' => [
-                'anchor', 'charmap', 'code', 'help', 'hr',
-                'image', 'link', 'lists', 'media', 'paste',
-                'searchreplace', 'table',
-            ],
-            'height' => 400,
-            'convert_urls' => false,
-            'element_format' => 'html',
-            // ...
-        ],
-    ]) ?>
+    <?= $form->field($model, 'kepada')->textarea(['rows' => 6]) ?>
+    <?php //= $form->field($model, 'kepada')->widget(alexantr\tinymce\TinyMCE::className(), [
+    //     'clientOptions' => [
+    //         'plugins' => [
+    //             'anchor', 'charmap', 'code', 'help', 'hr',
+    //             'image', 'link', 'lists', 'media', 'paste',
+    //             'searchreplace', 'table',
+    //         ],
+    //         'height' => 400,
+    //         'convert_urls' => false,
+    //         'element_format' => 'html',
+    //         // ...
+    //     ],
+    // ]) ?>
 
     <?= $form->field($model, 'di')->textInput(['maxlength' => true]) ?>
 

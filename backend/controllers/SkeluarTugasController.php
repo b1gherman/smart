@@ -305,7 +305,8 @@ class SkeluarTugasController extends Controller {
         $templateProcessor->setValue('tugas', $model->tugas);
         $templateProcessor->setValue('selama', $model->selama);
         $templateProcessor->setValue('lokasi', $model->lokasi);
-        $templateProcessor->setValue('tanggalberangkat', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
+        $templateProcessor->setValue('tanggalberangkat', Yii::$app->formatter->asDate($model->tanggal_berangkat, 'dd'));
+        $templateProcessor->setValue('tanggalharuskembali', Yii::$app->formatter->asDate($model->tanggal_haruskembali, 'dd MMMM yyyy'));
         $templateProcessor->setValue('sumberdana', $model->sumber_dana);
 
         $templateProcessor->setValue('tempat', $model->tempat);
