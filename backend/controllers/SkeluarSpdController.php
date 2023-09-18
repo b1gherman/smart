@@ -266,6 +266,7 @@ class SkeluarSpdController extends Controller
         $templateProcessor->setValue('nomor', $model->nomor);
         $templateProcessor->setValue('gelardepanppk', $model->idppk0->gelar_depan);
         $templateProcessor->setValue('namappk', $model->idppk0->namapegawai);
+        $templateProcessor->setValue('nipppk', $model->idppk0->nip);
         $templateProcessor->setValue('gelarbelakangppk', $model->idppk0->gelar_belakang);
         
         $templateProcessor->setValue('gelardepanppd', $model->idppd0->gelar_depan);
@@ -283,6 +284,9 @@ class SkeluarSpdController extends Controller
         $templateProcessor->setValue('tanggalberangkat', Yii::$app->formatter->asDate($modelsurattugas->tanggal_berangkat, 'dd MMMM yyyy'));
         $templateProcessor->setValue('tanggalharuskembali', Yii::$app->formatter->asDate($modelsurattugas->tanggal_haruskembali, 'dd MMMM yyyy'));
         $templateProcessor->setValue('nomorsurattugas', $modelsurattugas->nomor);
+
+        $templateProcessor->setValue('tempat', $model->tempat);
+        $templateProcessor->setValue('tanggal', Yii::$app->formatter->asDate($model->tanggal, 'dd MMMM yyyy'));
         
         $filename = "naskahkeluar_spd_$model->id.docx";
         $templateProcessor->saveAs(\Yii::$app->basePath . '/web/hasil/' . $filename);
